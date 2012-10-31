@@ -65,7 +65,7 @@ nmap <silent> <F2> :NERDTreeToggle<CR>
 "
 " zencoding
 "
-let g:user_zen_leader_key = ‘<c-e>‘
+let g:user_zen_leader_key = '<c-e>'
 
 "
 " Windows
