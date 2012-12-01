@@ -1,6 +1,9 @@
-" install plugins
-" ctrlp
+" 
+" install plugins:
+"
+" ctrlp.vim
 " nerdtree
+" vim-markdown
 " vim-surround
 " vim-signature
 " vim-easymotion
@@ -15,7 +18,7 @@ set smartcase
 set autoindent
 set tabstop=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
 set backspace=indent,eol,start
 set showmatch
 set ruler
@@ -28,8 +31,17 @@ set visualbell
 set cursorline
 set copyindent
 set nobackup
-
 set hidden " when e: FILE current file doesnt have to be saved, it's hidden
+filetype plugin indent on
+autocmd BufEnter * lcd %:p:h
+
+"
+" window splits
+"
+nnoremap <silent> <Leader><Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader><Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>+ :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 " 
 " colors
@@ -37,14 +49,11 @@ set hidden " when e: FILE current file doesnt have to be saved, it's hidden
 set background=light
 colorscheme solarized
 
-filetype plugin indent on
-
-autocmd BufEnter * lcd %:p:h
-
 "
 " CtrlP
 "
 let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPBuffer' " by default search in buffers
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_custom_ignore = {
@@ -65,7 +74,13 @@ nmap <silent> <F2> :NERDTreeToggle<CR>
 "
 " zencoding
 "
-let g:user_zen_leader_key = '<c-e>'
+let g:user_zen_leader_key = '<c-e>' " eg. ul > li<c-e>,
+
+"
+" easymotion
+"
+let g:EasyMotion_leader_key = '<Leader>'
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz' " no uppercase
 
 "
 " Windows
@@ -80,4 +95,7 @@ set guioptions-=r " no scrollbar
 
 autocmd FileType text setlocal textwidth=78
 
+"
+" for VsVim
+"
 nmap <C-]> :vsc Edit.GoToDefinition<CR>
