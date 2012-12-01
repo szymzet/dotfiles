@@ -35,6 +35,19 @@ set hidden " when e: FILE current file doesnt have to be saved, it's hidden
 filetype plugin indent on
 autocmd BufEnter * lcd %:p:h
 
+set history=1000
+set undolevels=1000
+set title " change terminal's title
+
+" use ; for efficiency
+nnoremap ; : 
+
+let mapleader=","
+
+" Use Q for formatting the current paragraph (or selection)
+vmap Q gq
+nmap Q gqap
+
 "
 " window splits
 "
