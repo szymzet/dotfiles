@@ -39,9 +39,7 @@ set history=1000
 set undolevels=1000
 set title " change terminal's title
 
-" use ; for efficiency
-nnoremap ; : 
-
+" <Leader> was '\' by default
 let mapleader=","
 
 " Use Q for formatting the current paragraph (or selection)
