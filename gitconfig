@@ -1,0 +1,41 @@
+[user]
+	name = szymzet
+	email = sz.zabkiewicz@gmail.com
+[core]
+	editor = vim
+    pager=less -x4
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+[color "branch"]
+    current = red reverse
+    local = blue
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[merge]
+	tool = meld
+	conflictstyle = diff3
+[diff]
+	tool = gvimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+    st = status -s
+    cl = clone
+    ci = commit
+    co = checkout
+    br = branch
+    le = log --oneline --decorate   
+    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
