@@ -1,8 +1,8 @@
 [user]
-	name = szymzet
-	email = sz.zabkiewicz@gmail.com
+    name = szymzet
+    email = sz.zabkiewicz@gmail.com
 [core]
-	editor = vim
+    editor = vim
     pager=less -x4
 [color]
     branch = auto
@@ -22,14 +22,14 @@
     changed = green
     untracked = cyan
 [merge]
-	tool = meld
-	conflictstyle = diff3
+    tool = meld
+    conflictstyle = diff3
 [diff]
-	tool = gvimdiff
+    tool = gvimdiff
 [difftool]
-	prompt = false
+    prompt = false
 [alias]
-	d = difftool
+    d = difftool
     st = status -s
     cl = clone
     ci = commit
