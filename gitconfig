@@ -22,10 +22,12 @@
     changed = green
     untracked = cyan
 [merge]
-    tool = meld
+    tool = mymeld
     conflictstyle = diff3
+[mergetool "mymeld"]
+    cmd = meld --diff $BASE $LOCAL --diff $BASE $REMOTE --diff $LOCAL $MERGED $REMOTE
 [diff]
-    tool = gvimdiff
+    tool = meld
 [difftool]
     prompt = false
 [alias]
@@ -35,7 +37,7 @@
     ci = commit
     co = checkout
     br = branch
-    le = log --oneline --decorate   
+    le = log --oneline --decorate
     ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 
