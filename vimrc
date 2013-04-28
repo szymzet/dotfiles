@@ -21,6 +21,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'mileszs/ack.vim'
+Bundle 'godlygeek/tabular'
 
 " <leader> was '\' by default
 "
@@ -96,7 +97,7 @@ nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 " colors
 "
 set background=dark
-colorscheme solarized
+colorscheme desert
 
 " highlight/remove trailing spaces
 "
@@ -131,12 +132,17 @@ nmap <silent> <F4> :Errors<CR>
 
 " youcompleteme
 "
-let g:ycm_key_list_select_completion = ['<c-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-k>', '<Up>']
+let g:ycm_key_list_select_completion = ['<tab>', '<c-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-tab>', '<c-k>', '<Up>']
+
+" ultisnips
+"
+let g:UltiSnipsExpandTrigger = '<c-l>'
+let g:UltiSnipsListSnippets = '<c-h>'
 
 " GUI
 "
-set guifont=Monospace\ 10
+set guifont=Source\ Code\ Pro\ 10
 set showcmd
 set scrolloff=3
 set display+=lastline
