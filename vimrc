@@ -22,6 +22,9 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'mileszs/ack.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'wesleyche/SrcExpl'
+Bundle 'majutsushi/tagbar'
+Bundle 'YankRing.vim'
 
 " <leader> was '\' by default
 "
@@ -37,9 +40,10 @@ set ignorecase
 set smartcase " case sensetive only if an uppercase character used
 
 set autoindent
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
+set smartindent
 set backspace=indent,eol,start " backspace over autoindent and line breaks
 
 set showmatch
@@ -111,6 +115,9 @@ endif
 " NERDTree
 "
 nmap <silent> <F2> :NERDTreeToggle<CR>
+let g:NERDTreeCaseSensitiveSort=0
+let g:NERDTreeDirArrows=1
+
 
 " tagbar
 "
@@ -132,13 +139,33 @@ nmap <silent> <F4> :Errors<CR>
 
 " youcompleteme
 "
-let g:ycm_key_list_select_completion = ['<tab>', '<c-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-tab>', '<c-k>', '<Up>']
+let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-tab>', '<Up>']
 
 " ultisnips
 "
 let g:UltiSnipsExpandTrigger = '<c-l>'
 let g:UltiSnipsListSnippets = '<c-h>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+
+" SrcExpl
+"
+let g:SrcExpl_updateTagsCmd = "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+let g:SrcExpl_winHeight = 12
+nmap <F6> :SrcExplToggle<CR> 
+
+" Tabular
+"
+nnoremap <leader>a= :Tab /=<CR> 
+
+" YankRing
+"
+"
+let g:yankring_replace_n_pkey = ''
+let g:yankring_replace_n_nkey = ''
+nnoremap <silent> <leader>v :<C-U>YRReplace '-1', P<CR>
+nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
 
 " GUI
 "
