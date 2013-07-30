@@ -22,7 +22,6 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'mileszs/ack.vim'
 Bundle 'godlygeek/tabular'
-Bundle 'wesleyche/SrcExpl'
 Bundle 'majutsushi/tagbar'
 Bundle 'YankRing.vim'
 
@@ -70,6 +69,7 @@ set fileformats=unix,dos
 
 set history=1000
 set undolevels=9999
+set updatetime=1000
 set title " change terminal's title
 set noautochdir " makes sense when using command-t, we want the editor
                 " top level directory to be constant
@@ -100,8 +100,8 @@ nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 " colors
 "
-set background=dark
-colorscheme desert
+set background=light
+colorscheme solarized
 
 " highlight/remove trailing spaces
 "
@@ -136,11 +136,19 @@ let g:ackprg = 'ag --nogroup --nocolor --column' " ag is faster: github.com/ggre
 " Syntastic
 "
 nmap <silent> <F4> :Errors<CR>
+let g:syntastic_check_on_open=1
+let g:syntastic_echo_current_error=1
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_quiet_warnings=0
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_cpp_checkers=['ycm']
 
 " youcompleteme
 "
 let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-tab>', '<Up>']
+let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " ultisnips
 "
@@ -148,12 +156,6 @@ let g:UltiSnipsExpandTrigger = '<c-l>'
 let g:UltiSnipsListSnippets = '<c-h>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-" SrcExpl
-"
-let g:SrcExpl_updateTagsCmd = "ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
-let g:SrcExpl_winHeight = 12
-nmap <F6> :SrcExplToggle<CR> 
 
 " Tabular
 "
@@ -169,7 +171,7 @@ nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
 
 " GUI
 "
-set guifont=Source\ Code\ Pro\ 10
+set guifont=Ubuntu\ Mono\ 11
 set showcmd
 set scrolloff=3
 set display+=lastline
