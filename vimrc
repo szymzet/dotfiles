@@ -17,13 +17,14 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'mileszs/ack.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'majutsushi/tagbar'
 Bundle 'YankRing.vim'
+Bundle 'tpope/vim-fugitive'
 
 " <leader> was '\' by default
 "
@@ -117,6 +118,19 @@ endif
 nmap <silent> <F2> :NERDTreeToggle<CR>
 let g:NERDTreeCaseSensitiveSort=0
 let g:NERDTreeDirArrows=1
+
+"
+" vim-airline
+"
+let g:airline_theme="solarized"
+let g:airline_detect_whitespace=0 "disabled
+let g:airline_powerline_fonts=1
+let g:airline_left_sep = '»'
+let g:airline_right_sep = '«'
+let g:airline_branch_prefix = '⎇ '
+let g:airline_enable_syntastic = 1
+let g:airline_enable_tagbar = 1
+let g:airline_enable_branch = 1
 
 
 " tagbar
