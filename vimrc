@@ -183,6 +183,9 @@ let g:yankring_replace_n_nkey = ''
 nnoremap <silent> <leader>v :<C-U>YRReplace '-1', P<CR>
 nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
 
+" disable Ctrl-a because it's used in tmux
+noremap <C-A> <Nop>
+
 " GUI
 "
 set guifont=Ubuntu\ Mono\ 11
