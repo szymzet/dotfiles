@@ -25,6 +25,8 @@ Bundle 'godlygeek/tabular'
 Bundle 'majutsushi/tagbar'
 Bundle 'YankRing.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-vividchalk'
+Bundle 'octol/vim-cpp-enhanced-highlight'
 
 " <leader> was '\' by default
 "
@@ -40,8 +42,8 @@ set ignorecase
 set smartcase " case sensetive only if an uppercase character used
 
 set autoindent
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent
 set backspace=indent,eol,start " backspace over autoindent and line breaks
@@ -162,6 +164,7 @@ let g:syntastic_cpp_checkers=['ycm']
 let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-tab>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " ultisnips
