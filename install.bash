@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+for file in *; do
+    file="${HOME}/.${file}"
+    if [[ -e "${file}" ]]; then
+        if [[ ! -L "${file}" ]]; then
+            echo "WARNING: ${file} exists but is not a symlink"
+        else
+            echo "- Already exists: ${file}"
+        fi
+    elif [[ "${file}" != "install.bash" ]]; then
+        echo "- Creating: ${file}"
+        ln -s "${PWD}/${flie}" "${file}"
+    fi
+done
+
+if [[ ! -e ~/.vim/bundle/vundle ]]; then
+    echo "- Initializing Vundle for Vim"
+    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    vim -u ~/.vimrc.bundles +BundleInstall +qa
+else
+    echo "- Vundle for Vim already initialized"
+fi
