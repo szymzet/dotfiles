@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 for file in *; do
-    file="${HOME}/.${file}"
-    if [[ -e "${file}" ]]; then
-        if [[ ! -L "${file}" ]]; then
+    target="${HOME}/.${file}"
+    if [[ -e "${target}" ]]; then
+        if [[ ! -L "${target}" ]]; then
             echo "WARNING: ${file} exists but is not a symlink"
         else
             echo "- Already exists: ${file}"
         fi
     elif [[ "${file}" != "install.bash" ]]; then
         echo "- Creating: ${file}"
-        ln -s "${PWD}/${flie}" "${file}"
+        ln -s "${PWD}/${file}" "${target}"
     fi
 done
 
