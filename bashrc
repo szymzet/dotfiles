@@ -63,3 +63,7 @@ fi
 if [ -f /usr/share/autojump/autojump.bash ]; then
     . /usr/share/autojump/autojump.bash
 fi
+
+export PATH=${PATH}:/home/szymzet/bin
+export CATALINA_HOME=/home/szymzet/lib/apache-tomcat-7.0.47
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle
