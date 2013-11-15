@@ -30,6 +30,7 @@ set smartcase " case sensetive only if an uppercase character used
 
 set autoindent
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
@@ -54,7 +55,6 @@ set hidden " when e: FILE current file doesnt have to be saved, it's hidden
 
 set mouse=a " always enable mouse
 set clipboard=unnamedplus " X Window clipboard
-filetype plugin indent on
 set fileformats=unix,dos
 
 set history=1000
