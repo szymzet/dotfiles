@@ -82,13 +82,6 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 nnoremap <leader>m :CtrlPBuffer<CR> " only opened buffers
 
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
 "
 " window splits
 "
@@ -178,10 +171,10 @@ nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 "
 " ultisnips
 "
-let g:UltiSnipsExpandTrigger = '<c-l>'
-let g:UltiSnipsListSnippets = '<c-h>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsExpandTrigger = '<c-s>'
+let g:UltiSnipsListSnippets = '<c-m-s>'
+let g:UltiSnipsJumpForwardTrigger = '<right>'
+let g:UltiSnipsJumpBackwardTrigger = '<left>'
 
 "
 " Tabular

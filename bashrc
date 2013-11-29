@@ -27,9 +27,9 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set the prompt
-bold=$(tput bold)
+promptcolor=$(tput bold && tput setaf 1)
 reset=$(tput sgr0)
-PS1='\[$reset\]\[$bold\]\u:\w\[$reset\]$(__git_ps1)\n$ '
+PS1='\[$reset\]\[$promptcolor\]\u:\w\[$reset\]$(__git_ps1)\n$ '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
