@@ -26,6 +26,7 @@ Bundle 'YankRing.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'octol/vim-cpp-enhanced-highlight'
 Bundle 'noahfrederick/vim-noctu'
+Bundle 'a.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
