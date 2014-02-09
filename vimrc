@@ -1,4 +1,5 @@
 filetype off                   " required before bundles
+set nocompatible
 
 "
 " Bundles
@@ -7,7 +8,12 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-filetype plugin indent on
+"
+" Filetype-specific behaviour enabled
+"
+filetype on
+filetype indent on
+filetype plugin on
 
 "
 " Basic Vim settings
@@ -16,7 +22,6 @@ filetype plugin indent on
 " <leader> was '\' by default
 let mapleader=","
 
-set nocompatible
 syntax on
 
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -32,6 +37,7 @@ set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
 set smartindent
 set backspace=indent,eol,start " backspace over autoindent and line breaks
@@ -54,7 +60,8 @@ set nobackup
 set hidden " when e: FILE current file doesnt have to be saved, it's hidden
 
 set mouse=a " always enable mouse
-set clipboard=unnamedplus " X Window clipboard
+set mousemodel=popup
+set clipboard=unnamedplus " X Window clipboard, the "+" register
 set fileformats=unix,dos
 
 set history=1000
@@ -67,6 +74,16 @@ set noautochdir " makes sense when using CtrlP, we want the editor
 nnoremap <leader>n :noh<CR> " hide search highlighting
 nnoremap <leader>w :w<CR> " save :D
 nnoremap <leader>q :q<CR> " quit
+
+"
+" whitechars
+"
+if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
+  let &listchars = "tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+  let &fillchars = "vert:\u259a,fold:\u00b7"
+else
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<
+endif
 
 "
 " CtrlP
@@ -155,31 +172,24 @@ nmap <silent> <F4> :Errors<CR>
 let g:syntastic_check_on_open=1
 let g:syntastic_echo_current_error=1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_quiet_warnings=0
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_cpp_checkers=['ycm']
-
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 1
 "
 " youcompleteme
 "
 let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-tab>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion = 1
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+let g:ycm_seed_identifiers_with_syntax = 1
 
 "
 " ultisnips
 "
-let g:UltiSnipsExpandTrigger = '<c-s>'
-let g:UltiSnipsListSnippets = '<c-m-s>'
-let g:UltiSnipsJumpForwardTrigger = '<right>'
-let g:UltiSnipsJumpBackwardTrigger = '<left>'
-
-"
-" Tabular
-"
-nnoremap <leader>a= :Tab /=<CR> 
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
 "
 " YankRing
@@ -189,13 +199,15 @@ let g:yankring_replace_n_nkey = ''
 nnoremap <silent> <leader>v :<C-U>YRReplace '-1', P<CR>
 nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
 
-" disable Ctrl-a because it's used in tmux
-noremap <C-A> <Nop>
-
 "
 " GUI
 "
-set guifont=Ubuntu\ Mono\ 11
+if has("unix")
+  set guifont=bitstream\ vera\ sans\ mono\ 10
+elseif has("win32")
+    set guifont=Consolas:h11,Courier\ New:h10
+endif
+
 set showcmd
 set scrolloff=3
 set display+=lastline
@@ -206,6 +218,22 @@ set guioptions-=r " no scrollbar
 
 autocmd FileType text setlocal textwidth=78
 autocmd BufRead,BufNewFile Makeppfile set filetype=make
+
+"
+" ruby
+"
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_rails = 1
+let g:ruby_minlines = 500
+autocmd FileType ruby set ts=2| set sw=2| set sts=2
+autocmd FileType ruby
+    \ if expand('%') =~# '_test\.rb$' |
+    \ compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
+    \ elseif expand('%') =~# '_spec\.rb$' |
+    \ compiler rspec | setl makeprg=rspec\ \"%:p\" |
+    \ else |
+    \ compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
+    \ endif
 
 "
 " Local config

@@ -7,26 +7,41 @@ call vundle#rc()
 " let Vundle manage the bundles
 Bundle 'gmarik/vundle'
 
-" Let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
 Bundle 'altercation/vim-colors-solarized'
+" moving around with a few keystrokes
 Bundle 'Lokaltog/vim-easymotion'
+" fuzzy file searching AWESOME
 Bundle 'kien/ctrlp.vim'
+" awesome autocompletion
 Bundle 'Valloric/YouCompleteMe'
+" match XML/HTML tags
 Bundle 'Valloric/MatchTagAlways'
+
 Bundle 'scrooloose/syntastic'
+
 Bundle 'scrooloose/nerdtree'
+
 Bundle 'bling/vim-airline'
+" closing quotes, parenthesis etc.
 Bundle 'Raimondi/delimitMate'
+
 Bundle 'SirVer/ultisnips'
+" fast grepping with perl regexp
 Bundle 'mileszs/ack.vim'
+
 Bundle 'majutsushi/tagbar'
+" yanking history
 Bundle 'YankRing.vim'
+" GIT
 Bundle 'tpope/vim-fugitive'
-Bundle 'octol/vim-cpp-enhanced-highlight'
+" using terminal colorscheme when not in gui
 Bundle 'noahfrederick/vim-noctu'
-Bundle 'a.vim'
+" matching things like if-end in ruby
+Bundle 'matchit.zip'
+" add closing end, endif, endfunction etc. automatically
+Bundle "tpope/vim-endwise"
+" up to date ruby support
+Bundle "vim-ruby/vim-ruby"
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
