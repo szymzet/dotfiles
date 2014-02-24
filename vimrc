@@ -22,23 +22,21 @@ filetype plugin on
 " <leader> was '\' by default
 let mapleader=","
 
+set t_Co=16
 syntax on
-
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
 
 set encoding=utf8
 set number
 set ignorecase
 set smartcase " case sensetive only if an uppercase character used
 
-set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set autoindent
+set copyindent " preserve indentation when creating a new line
 set smartindent
 set backspace=indent,eol,start " backspace over autoindent and line breaks
 
@@ -54,7 +52,6 @@ set wildmode=list:longest
 
 set visualbell " blink screen instead of beeping
 set cursorline
-set copyindent " preserve indentation when creating a new line
 
 set nobackup
 set hidden " when e: FILE current file doesnt have to be saved, it's hidden
@@ -116,12 +113,8 @@ set splitright
 " colors
 "
 set background=dark
-" shit is always broken in my terminals - screw it
-if has("gui_running")
-  colorscheme solarized
-else
-  colorscheme noctu
-end
+let g:solarized_termcolors=16
+colorscheme solarized
 
 "
 " NERDTree
@@ -133,12 +126,7 @@ let g:NERDTreeDirArrows=1
 "
 " vim-airline
 "
-if has("gui_running")
-  let g:airline_theme="solarized"
-else
-  let g:airline_theme="monochrome"
-end
-
+let g:airline_theme="solarized"
 let g:airline_detect_whitespace=0 "disabled
 let g:airline_powerline_fonts=1
 let g:airline_left_sep = '»'
@@ -175,7 +163,6 @@ let g:syntastic_enable_highlighting = 1
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_cpp_checkers=['ycm']
 let g:syntastic_enable_signs = 1
-let g:syntastic_auto_loc_list = 1
 "
 " youcompleteme
 "
@@ -217,6 +204,7 @@ set guioptions-=T " no toolbar
 set guioptions-=r " no scrollbar
 
 autocmd FileType text setlocal textwidth=78
+autocmd FileType markdown setlocal textwidth=78
 autocmd BufRead,BufNewFile Makeppfile set filetype=make
 
 "
@@ -225,6 +213,10 @@ autocmd BufRead,BufNewFile Makeppfile set filetype=make
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails = 1
 let g:ruby_minlines = 500
+
+" insert hashrocket =>
+imap <c-l> <space>=><space>
+
 autocmd FileType ruby set ts=2| set sw=2| set sts=2
 autocmd FileType ruby
     \ if expand('%') =~# '_test\.rb$' |

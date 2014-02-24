@@ -15,9 +15,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-export TERM="xterm-256color"
+HISTSIZE=9000
+HISTFILESIZE=10000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -27,9 +26,7 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set the prompt
-promptcolor=$(tput bold && tput setaf 1)
-reset=$(tput sgr0)
-PS1='\[$reset\]\[$promptcolor\]\u:\w\[$reset\]$(__git_ps1)\n$ '
+PS1='\[\033[01;32m\]\u:\w\[\033[01;34m\]$(__git_ps1)\[\033[00m\]\n$ '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -44,6 +41,11 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+
+# start new session named after current directory
+mux() {
+    TERM="xterm-256color" tmux new -s $(basename $(pwd))
+}
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -67,3 +69,5 @@ fi
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

@@ -42,6 +42,8 @@ Bundle 'matchit.zip'
 Bundle "tpope/vim-endwise"
 " up to date ruby support
 Bundle "vim-ruby/vim-ruby"
+" commenting
+Bundle "tomtom/tcomment_vim"
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
