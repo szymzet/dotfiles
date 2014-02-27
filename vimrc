@@ -68,19 +68,38 @@ set title " change terminal's title
 set noautochdir " makes sense when using CtrlP, we want the editor
                 " top level directory to be constant
 
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" handy shortcuts
 nnoremap <leader>n :noh<CR> " hide search highlighting
 nnoremap <leader>w :w<CR> " save :D
 nnoremap <leader>q :q<CR> " quit
+imap jj <Esc>
+
+" space to enter Ex line
+nnoremap <Space> :
+vnoremap <Space> :
+
+" show trailing whitespace
+set list listchars=tab:\ \ ,trail:·
 
 "
-" whitechars
-"
-if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
-  let &listchars = "tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
-  let &fillchars = "vert:\u259a,fold:\u00b7"
-else
-  set listchars=tab:>\ ,trail:-,extends:>,precedes:<
-endif
+" Strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+" Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+" Do the business:
+    %s/\s\+$//e
+" Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
+" e = edit, s = strip
+nmap <leader>es :StripTrailingWhitespaces<CR>
 
 "
 " CtrlP
@@ -94,16 +113,42 @@ let g:ctrlp_max_files = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+let g:ctrlp_by_filname = 1
+let g:ctrlp_switch_buffer = 0
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+  let g:ctrlp_use_caching = 0
+else
+  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+endif
 nnoremap <leader>m :CtrlPBuffer<CR> " only opened buffers
 
 "
 " window splits
 "
-" easier resizing
-nnoremap <silent> <leader><leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <leader><leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <silent> <leader>+ :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>  
+nnoremap <silent> <leader>ws :split<CR>
+nnoremap <silent> <leader>wv :vsplit<CR>
+nnoremap <silent> <leader>wc :wincmd c<CR>
+nnoremap <silent> <leader>ww :wincmd w<CR>
+
+nnoremap <silent> <up> :wincmd k<CR>
+nnoremap <silent> <leader>wk :wincmd k<CR>
+
+nnoremap <silent> <down> :wincmd j<CR>
+nnoremap <silent> <leader>wj :wincmd j<CR>
+
+nnoremap <silent> <left> :wincmd h<CR>
+nnoremap <silent> <leader>wh :wincmd h<CR>
+
+nnoremap <silent> <right> :wincmd l<CR>
+nnoremap <silent> <leader>wl :wincmd l<CR>
+
+" easier resizing 
+nnoremap <silent> <c-up> :resize +5<CR>
+nnoremap <silent> <c-down> :resize -5<CR>
+nnoremap <silent> <c-right> :vertical resize +5<CR>
+nnoremap <silent> <c-left> :vertical resize +5<CR>
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -119,7 +164,8 @@ colorscheme solarized
 "
 " NERDTree
 "
-nmap <silent> <F2> :NERDTreeToggle<CR>
+nmap <silent> <leader>ee :NERDTreeToggle<CR>
+let g:NERDTreeMinimalUI = 1
 let g:NERDTreeCaseSensitiveSort=0
 let g:NERDTreeDirArrows=1
 
@@ -129,17 +175,14 @@ let g:NERDTreeDirArrows=1
 let g:airline_theme="solarized"
 let g:airline_detect_whitespace=0 "disabled
 let g:airline_powerline_fonts=1
-let g:airline_left_sep = '»'
-let g:airline_right_sep = '«'
-let g:airline_branch_prefix = '⎇ '
-let g:airline_enable_syntastic = 1
-let g:airline_enable_tagbar = 1
-let g:airline_enable_branch = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#branch#enabled = 1
 
 "
 " tagbar
 "
-nmap <F3> :TagbarToggle<CR>
+nmap <silent> <leader>et :TagbarToggle<CR>
 
 "
 " easymotion
@@ -150,8 +193,9 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz' " no uppercase
 "
 " Ack / Ag
 "
-nnoremap <leader>f :Ack!<space>
-let g:ackprg = 'ag --nogroup --nocolor --column' " ag is faster: github.com/ggreer/the_silver_searcher
+"
+nmap <leader>ag :Ag ""<Left>
+nmap <leader>af :AgFile ""<Left>
 
 "
 " Syntastic
@@ -187,14 +231,15 @@ nnoremap <silent> <leader>v :<C-U>YRReplace '-1', P<CR>
 nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
 
 "
+" gundo
+"
+nmap <leader>u :GundoToggle<CR>
+let g:gundo_right = 1
+let g:gundo_width = 60
+
+"
 " GUI
 "
-if has("unix")
-  set guifont=bitstream\ vera\ sans\ mono\ 10
-elseif has("win32")
-    set guifont=Consolas:h11,Courier\ New:h10
-endif
-
 set showcmd
 set scrolloff=3
 set display+=lastline
@@ -218,14 +263,6 @@ let g:ruby_minlines = 500
 imap <c-l> <space>=><space>
 
 autocmd FileType ruby set ts=2| set sw=2| set sts=2
-autocmd FileType ruby
-    \ if expand('%') =~# '_test\.rb$' |
-    \ compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-    \ elseif expand('%') =~# '_spec\.rb$' |
-    \ compiler rspec | setl makeprg=rspec\ \"%:p\" |
-    \ else |
-    \ compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-    \ endif
 
 "
 " Local config

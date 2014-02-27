@@ -1,6 +1,3 @@
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -42,11 +39,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# start new session named after current directory
-mux() {
-    TERM="xterm-256color" tmux new -s $(basename $(pwd))
-}
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -70,4 +62,15 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# start new tmux session named after current directory
+mux() {
+    TERM="xterm-256color" tmux new -s $(basename $(pwd))
+}
+
+# create a directory and cd into it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
