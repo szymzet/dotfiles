@@ -74,3 +74,6 @@ mkcd() {
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# disable speaker beep
+xset -b

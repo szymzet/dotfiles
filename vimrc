@@ -73,7 +73,7 @@ map Q gq
 
 " handy shortcuts
 nnoremap <leader>n :noh<CR> " hide search highlighting
-nnoremap <leader>w :w<CR> " save :D
+nnoremap <leader>s :w<CR> " save :D
 nnoremap <leader>q :q<CR> " quit
 imap jj <Esc>
 
