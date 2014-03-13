@@ -26,7 +26,9 @@ set t_Co=16
 syntax on
 
 set encoding=utf8
+set fileencodings=utf-8,latin2,latin1
 set number
+set relativenumber
 set ignorecase
 set smartcase " case sensetive only if an uppercase character used
 
@@ -227,6 +229,7 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 "
 let g:yankring_replace_n_pkey = ''
 let g:yankring_replace_n_nkey = ''
+let g:yankring_history_file = '.yankring_history'
 nnoremap <silent> <leader>v :<C-U>YRReplace '-1', P<CR>
 nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
 
@@ -263,6 +266,12 @@ let g:ruby_minlines = 500
 imap <c-l> <space>=><space>
 
 autocmd FileType ruby set ts=2| set sw=2| set sts=2
+
+" highlight 80-th column only when we reach it (Damian Conway - Instantly
+" Better Vim from OSCON 2013)
+highligh ColorColumn ctermbg=10 guibg=Magenta 
+call matchadd('ColorColumn', '\%81v.', 100)
+call matchadd('ColorColumn', '\%121v.\+', 100) " after 120 its all bad
 
 "
 " Local config

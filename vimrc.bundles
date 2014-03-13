@@ -26,6 +26,8 @@ Bundle 'bling/vim-airline'
 Bundle 'Raimondi/delimitMate'
 
 Bundle 'SirVer/ultisnips'
+Bundle 'szymzet/vim-snippets'
+
 " fast grepping with perl regexp
 Bundle 'rking/ag.vim'
 
@@ -48,6 +50,10 @@ Bundle "tomtom/tcomment_vim"
 Bundle "skalnik/vim-vroom"
 
 Bundle "sjl/gundo.vim"
+
+Bundle "rails.vim"
+
+Bundle "ecomba/vim-ruby-refactoring"
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
