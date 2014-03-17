@@ -77,7 +77,8 @@ map Q gq
 nnoremap <leader>n :noh<CR> " hide search highlighting
 nnoremap <leader>s :w<CR> " save :D
 nnoremap <leader>q :q<CR> " quit
-imap jj <Esc>
+imap jk <Esc>
+imap kj <Esc>
 
 " space to enter Ex line
 nnoremap <Space> :
@@ -111,15 +112,16 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_max_height = 20
-let g:ctrlp_max_files = 0
+let g:ctrlp_max_files = 100000
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 let g:ctrlp_by_filname = 1
 let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 'rw'
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
   let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'ag "%s" -l -a -g "" -s --ignore "\.git$\|\.hg$\|\.svn$" ./'
 else
   let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
