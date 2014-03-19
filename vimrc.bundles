@@ -54,12 +54,8 @@ Bundle "sjl/gundo.vim"
 Bundle "rails.vim"
 
 Bundle "ecomba/vim-ruby-refactoring"
-"preview substitution in real time
-Bundle "osyo-manga/vim-over"
 
 Bundle "mattn/emmet-vim"
-
-Bundle "justinmk/vim-sneak"
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

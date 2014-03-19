@@ -225,6 +225,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsListSnippets = '<leader><tab>'
 
 "
 " YankRing
