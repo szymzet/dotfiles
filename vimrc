@@ -176,7 +176,6 @@ let g:NERDTreeDirArrows=1
 "
 " vim-airline
 "
-let g:airline_theme="solarized"
 let g:airline_detect_whitespace=0 "disabled
 let g:airline_powerline_fonts=1
 let g:airline#extensions#syntastic#enabled = 1
@@ -198,7 +197,7 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz' " no uppercase
 " Ack / Ag
 "
 "
-nmap <leader>ag :Ag ""<Left>
+nmap <leader>ag :Ag! ""<Left>
 nmap <leader>af :AgFile ""<Left>
 
 "
