@@ -243,6 +243,17 @@ let g:gundo_right = 1
 let g:gundo_width = 60
 
 "
+" matchtagalways
+"
+let g:mta_filetypes = {
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml': 1,
+      \ 'eruby': 1,
+      \ 'php' : 1,
+      \}
+
+"
 " GUI
 "
 set showcmd
