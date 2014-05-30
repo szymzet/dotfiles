@@ -8,12 +8,16 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'altercation/vim-colors-solarized'
+
 " moving around with a few keystrokes
 Bundle 'Lokaltog/vim-easymotion'
+
 " fuzzy file searching AWESOME
 Bundle 'kien/ctrlp.vim'
+
 " awesome autocompletion
 Bundle 'Valloric/YouCompleteMe'
+
 " match XML/HTML tags
 Bundle 'Valloric/MatchTagAlways'
 
@@ -26,36 +30,45 @@ Bundle 'bling/vim-airline'
 Bundle 'Raimondi/delimitMate'
 
 Bundle 'SirVer/ultisnips'
+
 Bundle 'szymzet/vim-snippets'
 
 " fast grepping with perl regexp
 Bundle 'rking/ag.vim'
 
 Bundle 'majutsushi/tagbar'
+
 " yanking history
 Bundle 'YankRing.vim'
+
 " GIT
 Bundle 'tpope/vim-fugitive'
+
 " using terminal colorscheme when not in gui
 Bundle 'noahfrederick/vim-noctu'
+
 " matching things like if-end in ruby
 Bundle 'matchit.zip'
+
 " add closing end, endif, endfunction etc. automatically
 Bundle "tpope/vim-endwise"
+
 " up to date ruby support
 Bundle "vim-ruby/vim-ruby"
-" commenting
-Bundle "tomtom/tcomment_vim"
-" running ruby tests
-Bundle "skalnik/vim-vroom"
-
-Bundle "sjl/gundo.vim"
 
 Bundle "rails.vim"
+
+" commenting
+Bundle "tomtom/tcomment_vim"
 
 Bundle "ecomba/vim-ruby-refactoring"
 
 Bundle "mattn/emmet-vim"
+
+" rainbow parenthesis for Lisps
+Bundle 'amdt/vim-niji'
+
+Bundle 'benmills/vimux'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

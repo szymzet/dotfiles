@@ -32,10 +32,10 @@ set relativenumber
 set ignorecase
 set smartcase " case sensetive only if an uppercase character used
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set autoindent
 set copyindent " preserve indentation when creating a new line
@@ -148,7 +148,7 @@ nnoremap <silent> <leader>wh :wincmd h<CR>
 nnoremap <silent> <right> :wincmd l<CR>
 nnoremap <silent> <leader>wl :wincmd l<CR>
 
-" easier resizing 
+" easier resizing
 nnoremap <silent> <c-up> :resize +5<CR>
 nnoremap <silent> <c-down> :resize -5<CR>
 nnoremap <silent> <c-right> :vertical resize +5<CR>
@@ -161,9 +161,13 @@ set splitright
 "
 " colors
 "
-set background=dark
-let g:solarized_termcolors=16
+set background=light
+"let g:solarized_termcolors=16
+" if has('gui_running')
 colorscheme solarized
+" else
+"     colorscheme noctu
+" endif
 
 "
 " NERDTree
@@ -181,6 +185,16 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
 
 "
 " tagbar
@@ -280,11 +294,26 @@ imap <c-l> <space>=><space>
 
 autocmd FileType ruby set ts=2| set sw=2| set sts=2
 
+"
+" vimux
+"
+
+" r -> run
+map <leader>xr :VimuxPromptCommand<cr>
+map <leader>xx :VimuxRunLastCommand<cr>
+" c -> close
+map <leader>xc :VimuxCloseRunner<cr>
+" t -> test (default rake taks is usually testing, TODO: improve this command)
+map <leader>xt :call VimuxRunCommand("bundle exec rake")<cr>
+let g:VimuxOrientation = "h"
+let g:VimuxHeight = "40"
+
+
 " highlight 80-th column only when we reach it (Damian Conway - Instantly
 " Better Vim from OSCON 2013)
-highligh ColorColumn ctermbg=10 guibg=Magenta 
+highligh ColorColumn ctermbg=10 guibg=Magenta
 call matchadd('ColorColumn', '\%81v.', 100)
-call matchadd('ColorColumn', '\%121v.\+', 100) " after 120 its all bad
+call matchadd('ColorColumn', '\%121v.', 100) " remind on 120th column
 
 "
 " Local config
