@@ -22,8 +22,12 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# MAC OS X
+# source /opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash
+# alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
+
 # set the prompt
-PS1='\[\033[01;32m\]\u:\w\[\033[01;34m\]$(__git_ps1)\[\033[00m\]\n$ '
+PS1='\[\033[01;31m\]\u:\w\[\033[01;34m\] $(__git_ps1)\[\033[00m\]\n$ '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -42,6 +46,19 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# ruby/git aliases and stuff
+alias be='bundle exec'
+alias migrate='bundle exec rake db:migrate && bundle exec rake db:rollback && bundle exec rake db:migrate'
+alias rollback='bundle exec rake db:rollback'
+alias gl='git ls -20'
+alias gs='git st'
+alias gd='git difftool'
+# alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
+
+agfront() {
+  ag $1 -G'.*\.(sass|coffee|handlebars)'  "${@:2}"
+}
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -64,7 +81,7 @@ fi
 
 # start new tmux session named after current directory
 mux() {
-    TERM="xterm-256color" tmux new -s $(basename $(pwd))
+    tmux new -s $(basename $(pwd))
 }
 
 # create a directory and cd into it
@@ -72,8 +89,14 @@ mkcd() {
     mkdir -p "$1" && cd "$1"
 }
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# MAC OS X
+# export LANG=pl_PL.UTF-8
+# export LC_ALL=pl_PL.UTF-8
 
-# disable speaker beep
-xset -b
+# [[ -f /opt/boxen/env.sh ]] && source /opt/boxen/env.sh
+# [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
+# enable colors for OS X
+# export CLICOLOR=1
+# export LSCOLORS=GxFxCxDxBxegedabagaced
+

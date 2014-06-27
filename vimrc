@@ -22,7 +22,7 @@ filetype plugin on
 " <leader> was '\' by default
 let mapleader=","
 
-set t_Co=16
+set t_Co=256
 syntax on
 
 set encoding=utf8
@@ -60,7 +60,6 @@ set hidden " when e: FILE current file doesnt have to be saved, it's hidden
 
 set mouse=a " always enable mouse
 set mousemodel=popup
-set clipboard=unnamedplus " X Window clipboard, the "+" register
 set fileformats=unix,dos
 
 set history=1000
@@ -136,6 +135,8 @@ nnoremap <silent> <leader>wv :vsplit<CR>
 nnoremap <silent> <leader>wc :wincmd c<CR>
 nnoremap <silent> <leader>ww :wincmd w<CR>
 
+nnoremap <silent> <leader>w= :wincmd =<CR>
+
 nnoremap <silent> <up> :wincmd k<CR>
 nnoremap <silent> <leader>wk :wincmd k<CR>
 
@@ -162,12 +163,10 @@ set splitright
 " colors
 "
 set background=light
-"let g:solarized_termcolors=16
-" if has('gui_running')
+if &diff
+  let g:solarized_contrast = "high"
+endif
 colorscheme solarized
-" else
-"     colorscheme noctu
-" endif
 
 "
 " NERDTree
@@ -188,13 +187,13 @@ let g:airline#extensions#branch#enabled = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 "
 " tagbar
@@ -305,8 +304,11 @@ map <leader>xx :VimuxRunLastCommand<cr>
 map <leader>xc :VimuxCloseRunner<cr>
 " t -> test (default rake taks is usually testing, TODO: improve this command)
 map <leader>xt :call VimuxRunCommand("bundle exec rake")<cr>
-let g:VimuxOrientation = "h"
-let g:VimuxHeight = "40"
+let g:VimuxOrientation = "v"
+let g:VimuxHeight = "20"
+
+" m -> map
+map <leader>xm :map ,r :call VimuxRunCommand("")<left><left>
 
 
 " highlight 80-th column only when we reach it (Damian Conway - Instantly

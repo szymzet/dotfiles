@@ -70,6 +70,10 @@ Bundle 'amdt/vim-niji'
 
 Bundle 'benmills/vimux'
 
+Bundle 'kchmck/vim-coffee-script'
+
+Bundle 'mustache/vim-mustache-handlebars'
+
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
