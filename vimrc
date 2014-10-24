@@ -162,11 +162,12 @@ set splitright
 "
 " colors
 "
-set background=light
-if &diff
-  let g:solarized_contrast = "high"
-endif
-colorscheme solarized
+" set background=light
+" if &diff
+"   let g:solarized_contrast = "high"
+" endif
+colorscheme Tomorrow-Night-Eighties
+set background=dark
 
 "
 " NERDTree
@@ -175,6 +176,7 @@ nmap <silent> <leader>ee :NERDTreeToggle<CR>
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeCaseSensitiveSort=0
 let g:NERDTreeDirArrows=1
+let g:NERDTreeChDirMode=2
 
 "
 " vim-airline
@@ -184,16 +186,23 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
+
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+
 let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
+let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
+let g:airline_right_sep = ''
 let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = ''
+let g:airline_symbols.paste = ''
+let g:airline_symbols.paste = ''
+let g:airline_symbols.whitespace = ''
 
 "
 " tagbar
@@ -210,8 +219,13 @@ let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz' " no uppercase
 " Ack / Ag
 "
 "
-nmap <leader>ag :Ag! ""<Left>
+let g:agprog="ag --column --smart-case"
+let g:aghighlight=1
+nmap <leader>fr :Ag! -i "" --ruby<Left><Left><Left><Left><Left><Left><Left><Left>
+nmap <leader>fc :Ag! -i "" --coffee<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nmap <leader>F :Ag! -i ""<Left>
 nmap <leader>af :AgFile ""<Left>
+nmap <leader>ag :Ag! ""<Left>
 
 "
 " Syntastic
@@ -273,13 +287,15 @@ set showcmd
 set scrolloff=3
 set display+=lastline
 set sidescrolloff=5
-set guioptions-=m " no menu
-set guioptions-=T " no toolbar
+" set guioptions-=m " no menu
+" set guioptions-=T " no toolbar
 set guioptions-=r " no scrollbar
 
 autocmd FileType text setlocal textwidth=78
 autocmd FileType markdown setlocal textwidth=78
 autocmd BufRead,BufNewFile Makeppfile set filetype=make
+
+set guifont=M+\ 1m\ regular:h14
 
 "
 " ruby
@@ -292,6 +308,7 @@ let g:ruby_minlines = 500
 imap <c-l> <space>=><space>
 
 autocmd FileType ruby set ts=2| set sw=2| set sts=2
+autocmd FileType c set tabstop=4| set softtabstop=4| set shiftwidth=4| set softtabstop=4
 
 "
 " vimux
@@ -304,18 +321,16 @@ map <leader>xx :VimuxRunLastCommand<cr>
 map <leader>xc :VimuxCloseRunner<cr>
 " t -> test (default rake taks is usually testing, TODO: improve this command)
 map <leader>xt :call VimuxRunCommand("bundle exec rake")<cr>
-let g:VimuxOrientation = "v"
+let g:VimuxOrientation = "h"
 let g:VimuxHeight = "20"
 
 " m -> map
 map <leader>xm :map ,r :call VimuxRunCommand("")<left><left>
 
-
-" highlight 80-th column only when we reach it (Damian Conway - Instantly
-" Better Vim from OSCON 2013)
-highligh ColorColumn ctermbg=10 guibg=Magenta
-call matchadd('ColorColumn', '\%81v.', 100)
-call matchadd('ColorColumn', '\%121v.', 100) " remind on 120th column
+"
+" bufferline
+"
+let g:bufferline_echo = 0
 
 "
 " Local config

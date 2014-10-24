@@ -26,6 +26,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 
 Bundle 'bling/vim-airline'
+
 " closing quotes, parenthesis etc.
 Bundle 'Raimondi/delimitMate'
 
@@ -73,6 +74,14 @@ Bundle 'benmills/vimux'
 Bundle 'kchmck/vim-coffee-script'
 
 Bundle 'mustache/vim-mustache-handlebars'
+
+Bundle 'chriskempson/vim-tomorrow-theme'
+
+Bundle 'thoughtbot/vim-rspec'
+
+Bundle 'mattn/gist-vim'
+
+Bundle 'mattn/webapi-vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
