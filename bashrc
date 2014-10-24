@@ -51,13 +51,26 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias be='bundle exec'
 alias migrate='bundle exec rake db:migrate && bundle exec rake db:rollback && bundle exec rake db:migrate'
 alias rollback='bundle exec rake db:rollback'
-alias gl='git ls -20'
-alias gs='git st'
-alias gd='git difftool'
-# alias p4merge='/Applications/p4merge.app/Contents/MacOS/p4merge'
+
+alias gls="git ls -20"
+alias gbr="git branch"
+alias gco="git checkout"
+alias gdf="git diff"
+alias gmg="git merge"
+alias grb="git rebase"
+alias gst="git st"
+alias gpr="git pull --rebase"
+alias gpo="git push origin"
+alias grs="git reset"
+alias gci="git commit"
+alias gaa="git add --all"
 
 agfront() {
   ag $1 -G'.*\.(sass|coffee|handlebars)'  "${@:2}"
+}
+
+vidf() {
+  git df | vimdiff -
 }
 
 # enable programmable completion features (you don't need to enable
