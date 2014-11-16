@@ -68,6 +68,8 @@ set updatetime=1000
 set title " change terminal's title
 set noautochdir " makes sense when using CtrlP, we want the editor
                 " top level directory to be constant
+                "
+set directory=$HOME/.vim/swapfiles//
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -279,6 +281,12 @@ let g:mta_filetypes = {
       \ 'eruby': 1,
       \ 'php' : 1,
       \}
+
+"
+" Gist
+"
+let g:gist_show_privates = 1
+let g:gist_post_private = 1
 
 "
 " GUI
