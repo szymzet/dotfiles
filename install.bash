@@ -21,3 +21,7 @@ if [[ ! -e ~/.vim/bundle/vundle ]]; then
 else
     echo " - Vundle for Vim already initialized"
 fi
+
+if [[ -e ~/.zshrc ]]; then
+  ln -s "${HOME}/.zshrc" "${HOME}/.zprofile"
+fi
