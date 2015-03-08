@@ -81,10 +81,6 @@ nnoremap <leader>q :q<CR> " quit
 imap jk <Esc>
 imap kj <Esc>
 
-" space to enter Ex line
-nnoremap <Space> :
-vnoremap <Space> :
-
 " show trailing whitespace
 set list listchars=tab:\ \ ,trail:·
 
@@ -162,16 +158,6 @@ set splitbelow
 set splitright
 
 "
-" colors
-"
-" set background=light
-" if &diff
-"   let g:solarized_contrast = "high"
-" endif
-colorscheme Tomorrow-Night-Eighties
-set background=dark
-
-"
 " NERDTree
 "
 nmap <silent> <leader>ee :NERDTreeToggle<CR>
@@ -183,39 +169,29 @@ let g:NERDTreeChDirMode=2
 "
 " vim-airline
 "
-let g:airline_detect_whitespace=0 "disabled
 let g:airline_powerline_fonts=1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep = ''
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = ''
-let g:airline_symbols.paste = ''
-let g:airline_symbols.paste = ''
-let g:airline_symbols.whitespace = ''
 
 "
 " tagbar
 "
 nmap <silent> <leader>et :TagbarToggle<CR>
+let g:tagbar_left = 1
 
 "
 " easymotion
 "
 let g:EasyMotion_leader_key = '\'
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz' " no uppercase
+let g:EasyMotion_do_shade = 1
+hi link EasyMotionTarget Search
+hi link EasyMotionTarget2First Search
+hi link EasyMotionTarget2Second Search
+hi link EasyMotionShade Comment
 
 "
 " Ack / Ag
@@ -303,7 +279,7 @@ autocmd FileType text setlocal textwidth=78
 autocmd FileType markdown setlocal textwidth=78
 autocmd BufRead,BufNewFile Makeppfile set filetype=make
 
-set guifont=M+\ 1m\ regular:h14
+set guifont=Inconsolata\-g\ for\ Powerline:h14
 
 "
 " ruby
@@ -319,26 +295,9 @@ autocmd FileType ruby set ts=2| set sw=2| set sts=2
 autocmd FileType c set tabstop=4| set softtabstop=4| set shiftwidth=4| set softtabstop=4
 
 "
-" vimux
+" indent lines
 "
-
-" r -> run
-map <leader>xr :VimuxPromptCommand<cr>
-map <leader>xx :VimuxRunLastCommand<cr>
-" c -> close
-map <leader>xc :VimuxCloseRunner<cr>
-" t -> test (default rake taks is usually testing, TODO: improve this command)
-map <leader>xt :call VimuxRunCommand("bundle exec rake")<cr>
-let g:VimuxOrientation = "h"
-let g:VimuxHeight = "20"
-
-" m -> map
-map <leader>xm :map ,r :call VimuxRunCommand("")<left><left>
-
-"
-" bufferline
-"
-let g:bufferline_echo = 0
+let g:indentLine_color_term = 239
 
 "
 " Local config
@@ -346,3 +305,6 @@ let g:bufferline_echo = 0
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
+
+colorscheme Tomorrow-Night
+set bg=dark
