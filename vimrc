@@ -18,12 +18,13 @@ filetype plugin on
 "
 " Basic Vim settings
 "
+set t_Co=256
+syntax on
+set background=dark
 
 " <leader> was '\' by default
 let mapleader=","
 
-set t_Co=256
-syntax on
 
 set encoding=utf8
 set fileencodings=utf-8,latin2,latin1
@@ -69,7 +70,7 @@ set title " change terminal's title
 set noautochdir " makes sense when using CtrlP, we want the editor
                 " top level directory to be constant
                 "
-set directory=$HOME/.vim/swapfiles//
+set directory=$HOME/.vim/swapfiles/
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -78,8 +79,13 @@ map Q gq
 nnoremap <leader>n :noh<CR> " hide search highlighting
 nnoremap <leader>s :w<CR> " save :D
 nnoremap <leader>q :q<CR> " quit
+nnoremap <leader>d :bprevious<CR>:bdelete #<CR> " close buffer without closing window
+noremap <space> :
 imap jk <Esc>
 imap kj <Esc>
+nnoremap <leader>yy "+yy
+noremap <leader>y "+y " clipboard copy&paste
+noremap <leader>p "+p
 
 " show trailing whitespace
 set list listchars=tab:\ \ ,trail:·
@@ -115,7 +121,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 let g:ctrlp_by_filname = 1
 let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 'rw'
+let g:ctrlp_working_path_mode = 'ra'
 if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag "%s" -l -a -g "" -s --ignore "\.git$\|\.hg$\|\.svn$" ./'
@@ -141,10 +147,8 @@ nnoremap <silent> <leader>wk :wincmd k<CR>
 nnoremap <silent> <down> :wincmd j<CR>
 nnoremap <silent> <leader>wj :wincmd j<CR>
 
-nnoremap <silent> <left> :wincmd h<CR>
 nnoremap <silent> <leader>wh :wincmd h<CR>
 
-nnoremap <silent> <right> :wincmd l<CR>
 nnoremap <silent> <leader>wl :wincmd l<CR>
 
 " easier resizing
@@ -152,6 +156,12 @@ nnoremap <silent> <c-up> :resize +5<CR>
 nnoremap <silent> <c-down> :resize -5<CR>
 nnoremap <silent> <c-right> :vertical resize +5<CR>
 nnoremap <silent> <c-left> :vertical resize +5<CR>
+
+" buffer switching
+nnoremap <silent> <left> :bprev<CR>
+nnoremap <silent> <c-h> :bprev<CR>
+nnoremap <silent> <right> :bnext<CR>
+nnoremap <silent> <c-l> :bnext<CR>
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -161,6 +171,7 @@ set splitright
 " NERDTree
 "
 nmap <silent> <leader>ee :NERDTreeToggle<CR>
+nmap <silent> <leader>ef :NERDTreeFind<CR>
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeCaseSensitiveSort=0
 let g:NERDTreeDirArrows=1
@@ -171,10 +182,11 @@ let g:NERDTreeChDirMode=2
 "
 let g:airline_powerline_fonts=1
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#enabled = 1
+let g:airline_theme='powerlineish'
 
 "
 " tagbar
@@ -225,12 +237,12 @@ let g:ycm_seed_identifiers_with_syntax = 1
 
 "
 " ultisnips
-"
+let g:UltiSnipsSnippetsDir = $HOME.'/.vim/szymzet_snippets'
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/szymzet_snippets']
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsListSnippets = '<leader><tab>'
-
 "
 " YankRing
 "
@@ -256,13 +268,15 @@ let g:mta_filetypes = {
       \ 'xml': 1,
       \ 'eruby': 1,
       \ 'php' : 1,
+      \ 'html.handlebars' : 1,
+      \ 'handlebars' : 1
       \}
 
 "
-" Gist
+" Gista
 "
-let g:gist_show_privates = 1
-let g:gist_post_private = 1
+let g:gista#post_private=1
+let g:gista#update_on_write=1
 
 "
 " GUI
@@ -279,7 +293,7 @@ autocmd FileType text setlocal textwidth=78
 autocmd FileType markdown setlocal textwidth=78
 autocmd BufRead,BufNewFile Makeppfile set filetype=make
 
-set guifont=Inconsolata\-g\ for\ Powerline:h14
+set guifont=Inconsolata\-g\ for\ Powerline:h13
 
 "
 " ruby
@@ -295,9 +309,28 @@ autocmd FileType ruby set ts=2| set sw=2| set sts=2
 autocmd FileType c set tabstop=4| set softtabstop=4| set shiftwidth=4| set softtabstop=4
 
 "
+" vim-obligue
+"
+nmap / <Plug>(Oblique-/)
+nmap ? <Plug>(Oblique-?)
+nmap z/ <Plug>(Oblique-F/)
+nmap z? <Plug>(Oblique-F?)
+nmap n <Plug>(Oblique-n)
+nmap N <Plug>(Oblique-N)
+nmap * <Plug>(Oblique-*)
+nmap # <Plug>(Oblique-#)
+nmap g* <Plug>(Oblique-g*)
+nmap g# <Plug>(Oblique-g#)
+
+"
 " indent lines
 "
 let g:indentLine_color_term = 239
+let g:indentLine_fileType = ['coffee']
+
+let g:molokai_original = 1
+let g:rehash256 = 1
+colorscheme molokai
 
 "
 " Local config
@@ -306,5 +339,3 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 
-colorscheme Tomorrow-Night
-set bg=dark

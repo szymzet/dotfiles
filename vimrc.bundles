@@ -7,8 +7,6 @@ call vundle#rc()
 " let Vundle manage the bundles
 Bundle 'gmarik/vundle'
 
-Bundle 'altercation/vim-colors-solarized'
-
 " moving around with a few keystrokes
 Bundle 'Lokaltog/vim-easymotion'
 
@@ -59,18 +57,21 @@ Bundle "tomtom/tcomment_vim"
 
 Bundle "mattn/emmet-vim"
 
-" rainbow parenthesis for Lisps
 Bundle 'amdt/vim-niji'
+
+Bundle 'guns/vim-clojure-static'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'tpope/vim-fireplace'
+Bundle 'tpope/vim-classpath'
 
 Bundle 'kchmck/vim-coffee-script'
 
 Bundle 'mustache/vim-mustache-handlebars'
 
-Bundle 'chriskempson/vim-tomorrow-theme'
-
 Bundle 'thoughtbot/vim-rspec'
 
-Bundle 'mattn/gist-vim'
+Bundle 'lambdalisue/vim-gista'
+Bundle 'tyru/open-browser.vim'
 
 Bundle 'mattn/webapi-vim'
 
@@ -82,6 +83,23 @@ Bundle 'Yggdroot/indentLine'
 Bundle 'tpope/vim-surround'
 
 Bundle 'tpope/vim-rbenv'
+
+Bundle 'chriskempson/base16-vim'
+
+Bundle 'tomasr/molokai'
+Bundle 'lsdr/monokai'
+
+Bundle 'paredit.vim'
+
+Bundle 'edkolev/tmuxline.vim'
+
+Bundle 'AndrewRadev/switch.vim'
+Bundle 'AndrewRadev/splitjoin.vim'
+
+Bundle 'junegunn/vim-pseudocl'
+Bundle 'junegunn/vim-oblique'
+
+Bundle 'tyru/open-browser-github.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
