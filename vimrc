@@ -23,8 +23,7 @@ syntax on
 set background=dark
 
 " <leader> was '\' by default
-let mapleader=","
-
+let mapleader=";"
 
 set encoding=utf8
 set fileencodings=utf-8,latin2,latin1
@@ -77,12 +76,12 @@ map Q gq
 
 " handy shortcuts
 nnoremap <leader>n :noh<CR> " hide search highlighting
-nnoremap <leader>s :w<CR> " save :D
+nnoremap <leader>w :w<CR> " save :D
 nnoremap <leader>q :q<CR> " quit
 nnoremap <leader>d :bprevious<CR>:bdelete #<CR> " close buffer without closing window
 noremap <space> :
-imap jk <Esc>
-imap kj <Esc>
+imap fd <Esc>
+imap df <Esc>
 nnoremap <leader>yy "+yy
 noremap <leader>y "+y " clipboard copy&paste
 noremap <leader>p "+p
@@ -104,14 +103,14 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
-" e = edit, s = strip
+" mnemonic e = edit, s = strip
 nmap <leader>es :StripTrailingWhitespaces<CR>
 
 "
 " CtrlP
 "
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_max_height = 20
@@ -129,7 +128,7 @@ else
   let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 endif
-nnoremap <leader>m :CtrlPBuffer<CR> " only opened buffers
+nmap , :CtrlPBuffer<CR>
 
 "
 " window splits
@@ -141,10 +140,8 @@ nnoremap <silent> <leader>ww :wincmd w<CR>
 
 nnoremap <silent> <leader>w= :wincmd =<CR>
 
-nnoremap <silent> <up> :wincmd k<CR>
 nnoremap <silent> <leader>wk :wincmd k<CR>
 
-nnoremap <silent> <down> :wincmd j<CR>
 nnoremap <silent> <leader>wj :wincmd j<CR>
 
 nnoremap <silent> <leader>wh :wincmd h<CR>
@@ -157,12 +154,6 @@ nnoremap <silent> <c-down> :resize -5<CR>
 nnoremap <silent> <c-right> :vertical resize +5<CR>
 nnoremap <silent> <c-left> :vertical resize +5<CR>
 
-" buffer switching
-nnoremap <silent> <left> :bprev<CR>
-nnoremap <silent> <c-h> :bprev<CR>
-nnoremap <silent> <right> :bnext<CR>
-nnoremap <silent> <c-l> :bnext<CR>
-
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
@@ -170,8 +161,9 @@ set splitright
 "
 " NERDTree
 "
-nmap <silent> <leader>ee :NERDTreeToggle<CR>
-nmap <silent> <leader>ef :NERDTreeFind<CR>
+" mnemonic: f-file t-tree
+nmap <silent> \t :NERDTreeToggle<CR>
+nmap <silent> \T :NERDTreeFind<CR>
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeCaseSensitiveSort=0
 let g:NERDTreeDirArrows=1
@@ -189,38 +181,17 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline_theme='powerlineish'
 
 "
-" tagbar
-"
-nmap <silent> <leader>et :TagbarToggle<CR>
-let g:tagbar_left = 1
-
-"
-" easymotion
-"
-let g:EasyMotion_leader_key = '\'
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz' " no uppercase
-let g:EasyMotion_do_shade = 1
-hi link EasyMotionTarget Search
-hi link EasyMotionTarget2First Search
-hi link EasyMotionTarget2Second Search
-hi link EasyMotionShade Comment
-
-"
 " Ack / Ag
-"
 "
 let g:agprog="ag --column --smart-case"
 let g:aghighlight=1
-nmap <leader>fr :Ag! -i "" --ruby<Left><Left><Left><Left><Left><Left><Left><Left>
-nmap <leader>fc :Ag! -i "" --coffee<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-nmap <leader>F :Ag! -i ""<Left>
-nmap <leader>af :AgFile ""<Left>
-nmap <leader>ag :Ag! ""<Left>
+" mnenomic: s-search
+nmap s :Ag! -i ""<Left>
+nmap <leader>s :Ag! ""<Left>
 
 "
 " Syntastic
 "
-nmap <silent> <F4> :Errors<CR>
 let g:syntastic_check_on_open=1
 let g:syntastic_echo_current_error=1
 let g:syntastic_enable_highlighting = 1
@@ -253,13 +224,6 @@ nnoremap <silent> <leader>v :<C-U>YRReplace '-1', P<CR>
 nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
 
 "
-" gundo
-"
-nmap <leader>u :GundoToggle<CR>
-let g:gundo_right = 1
-let g:gundo_width = 60
-
-"
 " matchtagalways
 "
 let g:mta_filetypes = {
@@ -285,8 +249,8 @@ set showcmd
 set scrolloff=3
 set display+=lastline
 set sidescrolloff=5
-" set guioptions-=m " no menu
-" set guioptions-=T " no toolbar
+set guioptions-=m " no menu
+set guioptions-=T " no toolbar
 set guioptions-=r " no scrollbar
 
 autocmd FileType text setlocal textwidth=78
@@ -309,25 +273,29 @@ autocmd FileType ruby set ts=2| set sw=2| set sts=2
 autocmd FileType c set tabstop=4| set softtabstop=4| set shiftwidth=4| set softtabstop=4
 
 "
-" vim-obligue
-"
-nmap / <Plug>(Oblique-/)
-nmap ? <Plug>(Oblique-?)
-nmap z/ <Plug>(Oblique-F/)
-nmap z? <Plug>(Oblique-F?)
-nmap n <Plug>(Oblique-n)
-nmap N <Plug>(Oblique-N)
-nmap * <Plug>(Oblique-*)
-nmap # <Plug>(Oblique-#)
-nmap g* <Plug>(Oblique-g*)
-nmap g# <Plug>(Oblique-g#)
-
-"
 " indent lines
 "
 let g:indentLine_color_term = 239
 let g:indentLine_fileType = ['coffee']
 
+"
+" `modern` command line keys
+"
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
+
+"
+" colorscheme
+"
 let g:molokai_original = 1
 let g:rehash256 = 1
 colorscheme molokai
@@ -338,4 +306,3 @@ colorscheme molokai
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
-

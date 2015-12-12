@@ -94,6 +94,8 @@ alias bundle='nocorrect bundle'
 alias ssh='nocorrect ssh'
 
 alias gr="RBENV_VERSION=2.1.5 grid"
+alias grc="gr console"
+alias grd="gr deploy"
 alias dr="RBENV_VERSION=2.1.5 dropship"
 
 gdfo() {

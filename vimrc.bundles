@@ -7,9 +7,6 @@ call vundle#rc()
 " let Vundle manage the bundles
 Bundle 'gmarik/vundle'
 
-" moving around with a few keystrokes
-Bundle 'Lokaltog/vim-easymotion'
-
 " fuzzy file searching AWESOME
 Bundle 'kien/ctrlp.vim'
 
@@ -32,8 +29,6 @@ Bundle 'SirVer/ultisnips'
 
 " fast grepping with perl regexp
 Bundle 'rking/ag.vim'
-
-Bundle 'majutsushi/tagbar'
 
 " yanking history
 Bundle 'YankRing.vim'
@@ -84,10 +79,8 @@ Bundle 'tpope/vim-surround'
 
 Bundle 'tpope/vim-rbenv'
 
-Bundle 'chriskempson/base16-vim'
 
 Bundle 'tomasr/molokai'
-Bundle 'lsdr/monokai'
 
 Bundle 'paredit.vim'
 
@@ -95,9 +88,6 @@ Bundle 'edkolev/tmuxline.vim'
 
 Bundle 'AndrewRadev/switch.vim'
 Bundle 'AndrewRadev/splitjoin.vim'
-
-Bundle 'junegunn/vim-pseudocl'
-Bundle 'junegunn/vim-oblique'
 
 Bundle 'tyru/open-browser-github.vim'
 
