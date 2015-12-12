@@ -4,6 +4,8 @@ case $- in
       *) return;;
 esac
 
+export IGNOREEOF=9  # Ctrl-D 9 times to kill session :D
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -12,7 +14,7 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=9000
+HISTSIZE=10000
 HISTFILESIZE=10000
 
 # check the window size after each command and, if necessary,
@@ -24,28 +26,21 @@ shopt -s checkwinsize
 
 # MAC OS X
 # source /opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash
-# alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
+alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 
 # set the prompt
 PS1='\[\033[01;31m\]\u:\w\[\033[01;34m\] $(__git_ps1)\[\033[00m\]\n$ '
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ruby/git aliases and stuff
 alias be='bundle exec'
@@ -65,17 +60,16 @@ alias grs="git reset"
 alias gci="git commit"
 alias gaa="git add --all"
 
-agfront() {
-  ag $1 -G'.*\.(sass|coffee|handlebars)'  "${@:2}"
+gdfo() { # diff origin
+    local branch=$(gbr | grep '*' | cut -d' ' -f2)
+    gdf origin/${branch}..${branch}
 }
 
-vidf() {
-  git df | vimdiff -
+glso() { # ls origin
+    local branch=$(gbr | grep '*' | cut -d' ' -f2)
+    gls origin/${branch}..${branch}
 }
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -92,24 +86,32 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
-# start new tmux session named after current directory
-mux() {
-    tmux new -s $(basename $(pwd))
-}
-
 # create a directory and cd into it
 mkcd() {
     mkdir -p "$1" && cd "$1"
 }
 
+# work stuff
+alias gr="RBENV_VERSION=2.1.5 grid"
+alias grc="gr console"
+alias grd="gr deploy"
+alias dr="RBENV_VERSION=2.1.5 dropship"
+
+
 # MAC OS X
 # export LANG=pl_PL.UTF-8
 # export LC_ALL=pl_PL.UTF-8
 
-# [[ -f /opt/boxen/env.sh ]] && source /opt/boxen/env.sh
-# [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+if [[ -e /usr/local/bin/brew ]]; then
+    [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+    [[ -s `brew --prefix`/etc/bash_completion.d/git-completion.bash ]] && . `brew --prefix`/etc/bash_completion.d/git-completion.bash
+    [[ -s `brew --prefix`/etc/bash_completion.d/lein-completion.bash ]] && . `brew --prefix`/etc/bash_completion.d/lein-completion.bash
+fi
+
+[[ -s /opt/starter-kit-cli/extras/starter-kit-cli-extras.sh ]] && . /opt/starter-kit-cli/extras/starter-kit-cli-extras.sh
 
 # enable colors for OS X
-# export CLICOLOR=1
-# export LSCOLORS=GxFxCxDxBxegedabagaced
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
+export JAVA_HOME=$(/usr/libexec/java_home)
