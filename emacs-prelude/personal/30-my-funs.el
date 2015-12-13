@@ -46,3 +46,21 @@
        (delete-other-windows))
 
      (define-key vc-annotate-mode-map (kbd "q") 'vc-annotate-quit)))
+
+(defun szz-toggle-polish-keys ()
+  "Toggles *right* command key to be Meta or Command (for foreign characters)"
+  (interactive)
+  (if (equal system-type 'darwin)
+      (if (equal mac-command-modifier 'meta)
+          (progn
+            (setq mac-right-option-modifier 'left
+                  mac-command-modifier 'super
+                  mac-right-command-modifier 'left)
+            (message "Polish keys OFF"))
+        (progn
+          (setq mac-right-option-modifier nil ; for Polish characters
+                mac-command-modifier 'meta
+                mac-right-command-modifier 'meta)
+          (message "Polish keys ON")))
+    (message "not running on Mac OS X, but on: %s" system-type)))
+

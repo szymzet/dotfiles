@@ -42,11 +42,6 @@
 ;;
 (setq grep-highlight-matches t)
 
-;; mac modifier keys
-;; (setq mac-right-option-modifier nil) ; for Polish characters
-;; (setq mac-command-modifier 'meta)
-;; (setq mac-right-command-modifier 'meta)
-
 ;; save system clipboard to kill ring
 (setq save-interprogram-paste-before-kill t)
 
