@@ -20,3 +20,5 @@
 (add-to-list 'auto-mode-alist '("\\.handlebars\\'" . web-mode))
 
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode)))
