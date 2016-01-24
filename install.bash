@@ -20,7 +20,7 @@ function info {
 function symlink_simple_dotfiles {
     local file=""
     local target=""
-    local simple_dotfiles=(bashrc gitconfig pryrc tmux.conf vimrc vimrc.bundles zshenv zshrc)
+    local simple_dotfiles=(bashrc gitconfig pryrc tmux.conf vimrc vimrc.bundles zshenv zshrc spacemacs)
 
     log "Creating symlinks for simple dotfiles"
 
@@ -115,5 +115,4 @@ function setup_emacs_with_prelude {
 symlink_simple_dotfiles
 initialize_vim_vundle
 symlink_zshrc_to_zprofile
-setup_emacs_with_prelude
 symlink_bashrc_to_profile
