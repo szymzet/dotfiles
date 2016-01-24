@@ -66,6 +66,18 @@ function symlink_zshrc_to_zprofile {
     log ""
 }
 
+function symlink_bashrc_to_profile {
+    log "Symlink .profile to .bashrc"
+    if [[ -e ~/.bashrc ]]; then
+        if [[ -e ~/.profile ]]; then
+            warn "failed because ~/.profile exists"
+        else
+            ln -s "${HOME}/.bashrc" "${HOME}/.profile"
+        fi
+    fi
+    log ""
+}
+
 function back_up_if_exists_in_home {
     local full_path="${HOME}/${1}"
     if [[ -e "${full_path}" ]]; then
@@ -104,3 +116,4 @@ symlink_simple_dotfiles
 initialize_vim_vundle
 symlink_zshrc_to_zprofile
 setup_emacs_with_prelude
+symlink_bashrc_to_profile
