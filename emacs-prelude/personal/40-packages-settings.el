@@ -8,6 +8,7 @@
 			    helm-swoop
                             beacon
                             org-bullets
+                            helm-c-yasnippet
                             hydra))
 
 (setq company-dabbrev-downcase nil)

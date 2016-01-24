@@ -4,7 +4,7 @@
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
- ; hdf; If there is more than one, they won't work right.
+ ;; If there is more than one, they won't work right.
  '(easy-kill-selection ((t (:inherit secondary-selection :background "BLACK"))))
  '(sp-show-pair-match-face ((t (:underline t)))))
 

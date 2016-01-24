@@ -12,14 +12,6 @@
 ;; join lines (join line below with current)
 (global-set-key (kbd "M-j") 'prelude-top-join-line)
 
-;; move by sexp with arrows
-(global-set-key (kbd "<left>") 'sp-backward-sexp)
-(global-set-key (kbd "<right>") 'sp-forward-sexp)
-(global-set-key (kbd "<up>") 'sp-up-sexp)
-(global-set-key (kbd "C-<up>") 'sp-backward-up-sexp)
-(global-set-key (kbd "<down>") 'sp-down-sexp)
-(global-set-key (kbd "C-<down>") 'sp-backward-down-sexp)
-
 ;; gist
 (global-set-key (kbd "C-c g") 'gist-buffer-private)
 (global-set-key (kbd "C-c G") 'gist-list)
@@ -61,7 +53,7 @@
                                 (interactive)
                                 (let ((current-prefix-arg '(4)))
                                   (call-interactively 'projectile-ag))))
-(key-chord-define-global "9f" 'projectile-find-file)
+(key-chord-define-global "9f" 'helm-projectile-find-file)
 (key-chord-define-global "9w" 'save-buffer)
 (key-chord-define-global "9r" 'anzu-query-replace-regexp)
 (key-chord-define-global "9t" 'delete-trailing-whitespace)
@@ -70,3 +62,4 @@
 
 (eval-after-load "term"
   '(define-key term-raw-map (kbd "C-c C-y") 'term-paste))
+
