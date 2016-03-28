@@ -28,6 +28,11 @@
      html
      javascript
      markdown
+     dash
+     (version-control :variables
+                      version-control-diff-tool 'git-gutter+
+                      version-control-global-margin t)
+     github
      (shell :variables
             shell-default-shell 'shell
             shell-default-position 'bottom
@@ -58,9 +63,7 @@
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(gist
-                                      rspec-mode
-                                      comment-dwim-2)
+   dotspacemacs-additional-packages '(rspec-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -108,7 +111,7 @@ before layers configuration."
                 dotspacemacs-inactive-transparency 90
                 dotspacemacs-mode-line-unicode-symbols t
                 dotspacemacs-smooth-scrolling t
-                dotspacemacs-smartparens-strict-mode t
+                dotspacemacs-smartparens-strict-mode nil
                 dotspacemacs-highlight-delimiters 'all
                 dotspacemacs-persistent-server nil
                 dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
@@ -121,7 +124,7 @@ before layers configuration."
   (setq dired-listing-switches "--group-directories-first -alh")
   )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
@@ -129,7 +132,17 @@ layers configuration."
   ;; use company mode everywhere
   (global-company-mode)
 
+  (show-smartparens-mode nil)
+
   (setq-default
+
+   backup-by-copying t
+   delete-old-versions t
+   kept-old-versions 2
+   kept-new-versions 6
+
+   evil-shift-round nil
+   evil-want-C-i-jump t
 
    scroll-margin 2
    use-dialog-box nil
@@ -171,6 +184,7 @@ layers configuration."
   ;; by default no details
   (defun szz-dired-startup () (dired-hide-details-mode t))
   (add-hook 'dired-mode-hook 'szz-dired-startup)
+  (add-hook 'text-mode-hook 'auto-fill-mode)
 
   (global-set-key (kbd "M-e") 'hippie-expand)
 
