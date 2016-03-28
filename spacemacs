@@ -78,7 +78,13 @@ before layers configuration."
                 dotspacemacs-verbose-loading nil
                 dotspacemacs-startup-banner nil
                 dotspacemacs-startup-lists '(recents projects)
-                dotspacemacs-themes '(zenburn leuven)
+                dotspacemacs-themes'(spacemacs-light
+                                     monokai
+                                     spacemacs-dark
+                                     solarized-light
+                                     solarized-dark
+                                     leuven
+                                     zenburn)
                 dotspacemacs-colorize-cursor-according-to-state t
                 dotspacemacs-default-font '("Hack"
                                             :size 15
