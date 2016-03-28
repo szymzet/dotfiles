@@ -147,18 +147,19 @@ layers configuration."
 
    ruby-version-manager 'rbenv
    projectile-switch-project-action 'projectile-dired
-
+   org-todo-keywords '((sequence "TODO" "IN PROGRESS" "DELEGATED" "WAITING" "|" "DONE" "CANCELED"))
    org-default-notes-file "~/Dropbox/notes/inbox.org"
    org-capture-templates
    `(("t" "todo" entry (file+headline "~/Dropbox/notes/inbox.org" "Tasks")
-      "* TODO %?\nCaptured %<%Y-%m-%d %H:%M>\n")
+      "* TODO %?\nCaptured %<%Y-%m-%d %H:%M>\n\n")
      ("n" "note" entry (file+headline "~/Dropbox/notes/inbox.org" "Notes")
-      "* NOTE %?\nCaptured %<%Y-%m-%d %H:%M>\n")
+      "* NOTE %?\nCaptured %<%Y-%m-%d %H:%M>\n\n")
      ("s" "snippet" entry (file+headline "~/Dropbox/notes/inbox.org" "Snippets")
-      "* %?\n\n#+BEGIN_SRC\n#+END_SRC\nCaptured %<%Y-%m-%d %H:%M>\n"))
+      "* %?\n\n#+BEGIN_SRC\n#+END_SRC\nCaptured %<%Y-%m-%d %H:%M>\n\n"))
    )
 
   (defun szz-open-scratch-buffer () (interactive) (find-file "~/Dropbox/notes/scratch.org"))
+  (defun szz-open-inbox-buffer () (interactive) (find-file "~/Dropbox/notes/inbox.org"))
   (defun szz-dired-notes () (interactive) (dired "~/Dropbox/notes/"))
 
   ;; by default no details
@@ -171,7 +172,7 @@ layers configuration."
     "og" 'gist-buffer-private
     "oG" 'gist-list
     "os" 'szz-open-scratch-buffer
-    "oc" 'org-capture
+    "oi" 'szz-open-inbox-buffer
     "on" 'szz-dired-notes)
   )
 
