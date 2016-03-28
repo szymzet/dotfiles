@@ -13,7 +13,8 @@
    dotspacemacs-configuration-layers
    '((auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-sort-by-usage t)
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-private-snippets-directory "~/.dotfiles/yasnippets")
      better-defaults
      emacs-lisp
      git
@@ -161,6 +162,8 @@ layers configuration."
   ;; by default no details
   (defun szz-dired-startup () (dired-hide-details-mode t))
   (add-hook 'dired-mode-hook 'szz-dired-startup)
+
+  (global-set-key (kbd "M-e") 'hippie-expand)
 
   (spacemacs/set-leader-keys
     "og" 'gist-buffer-private
