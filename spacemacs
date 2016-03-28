@@ -20,6 +20,8 @@
      git
      clojure
      ruby
+     python
+     ipython-notebook
      erlang
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
      evil-commentary
