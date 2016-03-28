@@ -32,7 +32,6 @@ alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 PS1='\[\033[01;31m\]\u:\w\[\033[01;34m\] $(__git_ps1)\[\033[00m\]\n$ '
 
 # enable color support of ls and also add handy aliases
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -91,12 +90,23 @@ mkcd() {
     mkdir -p "$1" && cd "$1"
 }
 
+eval "$(rbenv init -)"
+
 # work stuff
 alias gr="RBENV_VERSION=2.1.5 grid"
 alias grc="gr console"
 alias grd="gr deploy"
 alias dr="RBENV_VERSION=2.1.5 dropship"
 
+grdperf() {
+  echo "Running gr deploy ${1} staging eu-cental-1"
+  gr deploy $1 staging eu-central-1
+}
+
+grcperf() {
+  echo "Running gr console ${1} staging eu-cental-1"
+  gr console $1 staging eu-central-1
+}
 
 # MAC OS X
 # export LANG=pl_PL.UTF-8
@@ -115,3 +125,5 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 export JAVA_HOME=$(/usr/libexec/java_home)
+
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
