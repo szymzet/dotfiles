@@ -175,6 +175,8 @@ layers configuration."
       "* NOTE %?\nCaptured %<%Y-%m-%d %H:%M>\n\n")
      ("s" "snippet" entry (file+headline "~/Dropbox/notes/inbox.org" "Snippets")
       "* %?\n\n#+BEGIN_SRC\n#+END_SRC\nCaptured %<%Y-%m-%d %H:%M>\n\n"))
+
+   shell-command-switch "-ic"           ; -i for interactive
    )
 
   (defun szz-open-scratch-buffer () (interactive) (find-file "~/Dropbox/notes/scratch.org"))
