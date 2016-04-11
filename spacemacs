@@ -135,6 +135,7 @@ layers configuration."
   (show-smartparens-mode nil)
 
   (setq-default
+   flycheck-disabled-checkers '(ruby-rubylint)
 
    backup-by-copying t
    delete-old-versions t
