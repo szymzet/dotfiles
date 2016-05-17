@@ -14,13 +14,18 @@
    '((auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t
-                      auto-completion-private-snippets-directory "~/.dotfiles/yasnippets")
+                      auto-completion-private-snippets-directory "~/.dotfiles/yasnippets"
+                      auto-completion-return-key-behavior nil
+                      auto-completion-tab-key-behavior 'complete)
      better-defaults
      emacs-lisp
      git
      clojure
-     ruby
+     (ruby :variables
+           ruby-version-manager 'rbenv
+           ruby-test-runner 'rspec)
      python
+     sql
      ipython-notebook
      erlang
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
@@ -29,14 +34,13 @@
      javascript
      markdown
      dash
-     (version-control :variables
-                      version-control-diff-tool 'git-gutter+
-                      version-control-global-margin t)
+     restclient
+     version-control
      github
      (shell :variables
             shell-default-shell 'shell
             shell-default-position 'bottom
-            shell-default-height 30
+            shell-default-height 50
             shell-default-term-shell "/bin/bash")
      (org :variables
           org-enable-github-support t)
@@ -80,6 +84,7 @@ before layers configuration."
   (setq-default dotspacemacs-editing-style 'vim
                 dotspacemacs-verbose-loading nil
                 dotspacemacs-startup-banner nil
+                dotspacemacs-mode-line-unicode-symbols nil
                 dotspacemacs-startup-lists '(recents projects)
                 dotspacemacs-themes'(spacemacs-light
                                      monokai
@@ -88,12 +93,12 @@ before layers configuration."
                                      solarized-dark
                                      leuven
                                      zenburn)
-                dotspacemacs-colorize-cursor-according-to-state t
+                dotspacemacs-colorize-cursor-according-to-state nil
                 dotspacemacs-default-font '("Hack"
-                                            :size 15
+                                            :size 14
                                             :weight normal
                                             :width normal
-                                            :powerline-scale 1.1)
+                                            :powerline-scale 1.0)
                 dotspacemacs-leader-key "SPC"
                 dotspacemacs-emacs-leader-key "M-m"
                 dotspacemacs-major-mode-leader-key ","
@@ -106,11 +111,10 @@ before layers configuration."
                 dotspacemacs-loading-progress-bar nil
                 dotspacemacs-fullscreen-at-startup nil
                 dotspacemacs-fullscreen-use-non-native nil
-                dotspacemacs-maximized-at-startup t
+                dotspacemacs-maximized-at-startup nil
                 dotspacemacs-active-transparency 90
                 dotspacemacs-inactive-transparency 90
-                dotspacemacs-mode-line-unicode-symbols t
-                dotspacemacs-smooth-scrolling t
+                dotspacemacs-smooth-scrolling nil
                 dotspacemacs-smartparens-strict-mode nil
                 dotspacemacs-highlight-delimiters 'all
                 dotspacemacs-persistent-server nil
@@ -131,6 +135,8 @@ layers configuration."
 
   ;; use company mode everywhere
   (global-company-mode)
+
+  (which-function-mode)
 
   (show-smartparens-mode nil)
 
@@ -158,12 +164,13 @@ layers configuration."
 
    company-idle-delay 0
    company-show-numbers t
-   company-minimum-prefix-length 1
+   company-minimum-prefix-length 3
 
    magit-push-always-verify nil
 
    web-mode-markup-indent-offset 2
    js-indent-level 2
+   which-func-unknown "func n/a"
 
    ruby-version-manager 'rbenv
    projectile-switch-project-action 'projectile-dired
@@ -190,10 +197,10 @@ layers configuration."
   (add-hook 'text-mode-hook 'auto-fill-mode)
 
   (global-set-key (kbd "M-e") 'hippie-expand)
+  (global-set-key (kbd "C-M-l") 'next-buffer)
+  (global-set-key (kbd "C-M-h") 'previous-buffer)
 
   (spacemacs/set-leader-keys
-    "og" 'gist-buffer-private
-    "oG" 'gist-list
     "os" 'szz-open-scratch-buffer
     "oi" 'szz-open-inbox-buffer
     "on" 'szz-dired-notes)
@@ -201,3 +208,10 @@ layers configuration."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
