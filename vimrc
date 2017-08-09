@@ -1,93 +1,248 @@
-filetype off                   " required before bundles
 set nocompatible
+filetype off
 
-"
-" Bundles
-"
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'tyru/open-browser.vim'
+Plugin 'tyru/open-browser-github.vim'
+Plugin 'lambdalisue/vim-gista'
+Plugin 'Shougo/junkfile.vim'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tomasr/molokai'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-ruby/vim-ruby', {'for' : 'ruby'}
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'w0rp/ale'
+Plugin 'janko-m/vim-test'
+call vundle#end()
+runtime macros/matchit.vim " see :help matchit-activate
 
-"
-" Filetype-specific behaviour enabled
-"
-filetype on
-filetype indent on
-filetype plugin on
+let mapleader = "\<space>"
 
-"
-" Basic Vim settings
-"
-set t_Co=256
-syntax on
-set background=dark
+" v == vimrc
+nnoremap <leader>v :vsplit $MYVIMRC<cr>
+nnoremap <leader>V :source $MYVIMRC<cr>
 
-" <leader> was '\' by default
-let mapleader=";"
+inoremap jk <esc>
+inoremap kj <esc>
+inoremap fd <esc>
 
-set encoding=utf8
-set fileencodings=utf-8,latin2,latin1
-set number
-set relativenumber
-set ignorecase
-set smartcase " case sensetive only if an uppercase character used
-
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set autoindent
-set copyindent " preserve indentation when creating a new line
-set smartindent
-set backspace=indent,eol,start " backspace over autoindent and line breaks
-
-set showmatch
-set ruler
-set hlsearch
-set incsearch
-set laststatus=2 " always show statusline
-set virtualedit=onemore " allow to move one character beyond the last one
-
-set wildmenu " TAB expansion of commands in command mode
-set wildmode=list:longest
-
-set visualbell " blink screen instead of beeping
-set cursorline
-
-set nobackup
-set hidden " when e: FILE current file doesnt have to be saved, it's hidden
-
-set mouse=a " always enable mouse
-set mousemodel=popup
-set fileformats=unix,dos
-
-set history=1000
-set undolevels=9999
-set updatetime=1000
-set title " change terminal's title
-set noautochdir " makes sense when using CtrlP, we want the editor
-                " top level directory to be constant
-                "
-set directory=$HOME/.vim/swapfiles/
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" handy shortcuts
-nnoremap <leader>n :noh<CR> " hide search highlighting
-nnoremap <leader>w :w<CR> " save :D
-nnoremap <leader>q :q<CR> " quit
-nnoremap <leader>d :bprevious<CR>:bdelete #<CR> " close buffer without closing window
-noremap <space> :
-imap fd <Esc>
-imap df <Esc>
 nnoremap <leader>yy "+yy
 noremap <leader>y "+y " clipboard copy&paste
 noremap <leader>p "+p
 
-" show trailing whitespace
-set list listchars=tab:\ \ ,trail:·
+" quick nohighlight
+nnoremap <leader>c :nohlsearch<CR>:match<CR>:echo 'cleared search highlight'<CR> " c == clear
+
+" Disable Ex-mode.
+nnoremap Q q
+
+" Save files quickly
+nnoremap <leader>w :update<CR>
+
+" A'la M-x in Emacs
+nnoremap <leader>x :
+
+" '1' for 'shift-1 (!)'
+nnoremap <leader>1 :!
+vnoremap <leader>1 :!
+nnoremap <leader>! :!
+vnoremap <leader>! :!
+
+" 'E' for 'Execute'
+inoremap <C-e> <ESC>:exec 'r! '.getline('.')<CR>
+nnoremap <C-e> :exec 'r! '.getline('.')<CR>
+nnoremap <leader>e :exec 'r! '.getline('.')<CR>
+
+nnoremap <leader>[ :bp<CR>
+nnoremap <leader>] :bn<CR>
+
+nnoremap <leader>D :bd!<CR>
+nnoremap <leader>d :bprevious<CR>:bdelete #<CR> " close buffer without closing window
+nnoremap <leader>Y :let @* = expand("%:p")<CR>:echo 'copied to clipboard: '.@*<CR>
+
+nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :qall<CR>
+
+nnoremap <leader>n :new<CR>
+
+nnoremap <leader>wh :wincmd h<CR>
+nnoremap <leader>wj :wincmd j<CR>
+nnoremap <leader>wk :wincmd k<CR>
+nnoremap <leader>wl :wincmd l<CR>
+nnoremap <leader>wv :wincmd v<CR>
+nnoremap <leader>ws :wincmd s<CR>
+nnoremap <leader>wo :wincmd o<CR>
+nnoremap <leader>wc :wincmd c<CR>
+nnoremap <leader>wH :wincmd H<CR>
+nnoremap <leader>wJ :wincmd J<CR>
+nnoremap <leader>wK :wincmd K<CR>
+nnoremap <leader>wL :wincmd L<CR>
+nnoremap <leader>w= :wincmd =<CR>
+
+" easier resizing
+nnoremap <silent> <c-up> :resize +5<CR>
+nnoremap <silent> <c-down> :resize -5<CR>
+nnoremap <silent> <c-right> :vertical resize +5<CR>
+nnoremap <silent> <c-left> :vertical resize -5<CR>
+
+"
+" Vim settings
+"
+filetype plugin indent on
+syntax on
+set encoding=utf8
+set autoindent
+set autoread " reload file if changed outside
+set backspace=indent,eol,start
+set cmdheight=2
+set display=lastline
+set fileformats=unix,dos,mac
+set foldopen+=jump
+set formatoptions+=j
+set grepprg=/usr/local/bin/ag\ --vimgrep\ -s\ -H\ --nocolor\ --nogroup\ --column\ --smart-case\ --follow
+set history=200
+set hidden " buffers with changes can be window-less
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set laststatus=2
+set lazyredraw
+set matchpairs+=<:> " Match, to be used with %
+set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
+set scrolloff=1
+set shiftwidth=2
+set softtabstop=2 " Let backspace delete indent
+set splitbelow " Puts new split windows to the bottom of the current
+set splitright " Puts new vsplit windows to the right of the current
+set tabstop=2 " An indentation every four columns
+set expandtab " Tabs are spaces, not tabs
+set softtabstop=2 " Let backspace delete indent
+" source: https://github.com/tpope/tpope/blob/master/.vimrc
+set timeoutlen=1200 " A little bit more time for macros
+set ttimeoutlen=50  " Make Esc work faster
+set undofile
+set virtualedit=onemore " allow to move one character beyond the last one
+set visualbell
+set wildignore+=tags,.*.un~,*.pyc,*.class
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildmenu
+set wildmode=longest:full,full
+set nowritebackup
+set nobackup
+set directory=$HOME/.vim/swapfiles/
+set undodir=$HOME/.vim/swapfiles/
+set backupdir-=.
+set number
+set relativenumber
+" copy to clipboard
+set clipboard=unnamed
+
+" Don't use Ex mode, use Q for formatting
+noremap Q gq
+
+set bg=dark
+let g:molokai_original = 1
+let g:rehash256 = 1
+colorscheme molokai
+
+set shell=/usr/local/bin/bash\ -i
+"
+" emacs style key bindings on command line
+"
+" start of line
+cnoremap <C-A>    <Home>
+" back one character
+cnoremap <C-B>    <Left>
+" delete character under cursor
+cnoremap <C-D>    <Del>
+" end of line
+cnoremap <C-E>    <End>
+" forward one character
+cnoremap <C-F>    <Right>
+" recall newer command-line
+cnoremap <C-N>    <Down>
+" recall previous (older) command-line
+cnoremap <C-P>    <Up>
+" back one word
+cnoremap <Esc><C-B>  <S-Left>
+" forward one word
+cnoremap <Esc><C-F>  <S-Right>
+" paste
+cnoremap <C-y> <C-r>*
+
+"
+" FZF
+"
+" add the following to bashrc for ultra fast files listings
+"   export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+let g:fzf_command_prefix = 'FZF'
+let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_history_dir = '~/.fzf-history'
+nnoremap <leader>f :FZFFiles .<CR>
+nnoremap <leader>b :FZFBuffers<CR>
+nnoremap <leader>s :FZFBLines<CR>
+nnoremap <leader>C :FZFCommands<CR>
+nnoremap <leader>/ :FZFAg 
+nnoremap <leader>* :FZFAg <C-R><C-W><CR>
+
+"
+" NERDTree
+"
+" mnemonic: f-file t-tree
+nnoremap <silent> <leader>t :NERDTreeToggle<CR>
+nnoremap <silent> <leader>T :NERDTreeFind<CR>
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeCaseSensitiveSort=0
+let g:NERDTreeDirArrows=1
+let g:NERDTreeChDirMode=2
+
+"
+" EasyMotion
+"
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1
+
+" 'L' for 'move to Line'
+nmap <leader>l <Plug>(easymotion-overwin-line)
+
+" 'j' for 'jump to character'
+nmap <leader>j <Plug>(easymotion-overwin-f)
+
+"
+" Github
+"
+let g:openbrowser_github_always_use_commit_hash=0
+let g:openbrowser_github_url_exists_check='no'
+nnoremap <leader>gh :OpenGithubFile<CR>
+
+
+"
+" Gista
+"
+let g:gista#command#post#default_public=0
+let g:gista#command#post#allow_empty_description=1
+
+"
+" Ruby settings
+"
+augroup myfiletypes
+  " Clear old autocmds in group
+  autocmd!
+  autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
+augroup END
 
 "
 " Strip trailing whitespace
@@ -103,206 +258,6 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
+
 " mnemonic e = edit, s = strip
-nmap <leader>es :StripTrailingWhitespaces<CR>
-
-"
-" CtrlP
-"
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_match_window_bottom = 0
-let g:ctrlp_max_height = 20
-let g:ctrlp_max_files = 100000
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-let g:ctrlp_by_filname = 1
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 'ra'
-if executable('ag')
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag "%s" -l -a -g "" -s --ignore "\.git$\|\.hg$\|\.svn$" ./'
-else
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-endif
-nmap , :CtrlPBuffer<CR>
-
-"
-" window splits
-"
-nnoremap <silent> <leader>ws :split<CR>
-nnoremap <silent> <leader>wv :vsplit<CR>
-nnoremap <silent> <leader>wc :wincmd c<CR>
-nnoremap <silent> <leader>ww :wincmd w<CR>
-
-nnoremap <silent> <leader>w= :wincmd =<CR>
-
-nnoremap <silent> <leader>wk :wincmd k<CR>
-
-nnoremap <silent> <leader>wj :wincmd j<CR>
-
-nnoremap <silent> <leader>wh :wincmd h<CR>
-
-nnoremap <silent> <leader>wl :wincmd l<CR>
-
-" easier resizing
-nnoremap <silent> <c-up> :resize +5<CR>
-nnoremap <silent> <c-down> :resize -5<CR>
-nnoremap <silent> <c-right> :vertical resize +5<CR>
-nnoremap <silent> <c-left> :vertical resize +5<CR>
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
-"
-" NERDTree
-"
-" mnemonic: f-file t-tree
-nmap <silent> \t :NERDTreeToggle<CR>
-nmap <silent> \T :NERDTreeFind<CR>
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeCaseSensitiveSort=0
-let g:NERDTreeDirArrows=1
-let g:NERDTreeChDirMode=2
-
-"
-" vim-airline
-"
-let g:airline_powerline_fonts=1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline_theme='powerlineish'
-
-"
-" Ack / Ag
-"
-let g:agprog="ag --column --smart-case"
-let g:aghighlight=1
-" mnenomic: s-search
-nmap s :Ag! -i ""<Left>
-nmap <leader>s :Ag! ""<Left>
-
-"
-" Syntastic
-"
-let g:syntastic_check_on_open=1
-let g:syntastic_echo_current_error=1
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_cpp_checkers=['ycm']
-let g:syntastic_enable_signs = 1
-"
-" youcompleteme
-"
-let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-tab>', '<Up>']
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-
-"
-" ultisnips
-let g:UltiSnipsSnippetsDir = $HOME.'/.vim/szymzet_snippets'
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.vim/szymzet_snippets']
-let g:UltiSnipsExpandTrigger = '<c-j>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsListSnippets = '<leader><tab>'
-"
-" YankRing
-"
-let g:yankring_replace_n_pkey = ''
-let g:yankring_replace_n_nkey = ''
-let g:yankring_history_file = '.yankring_history'
-nnoremap <silent> <leader>v :<C-U>YRReplace '-1', P<CR>
-nnoremap <silent> <leader>V :<C-U>YRReplace '1', P<CR>
-
-"
-" matchtagalways
-"
-let g:mta_filetypes = {
-      \ 'html' : 1,
-      \ 'xhtml' : 1,
-      \ 'xml': 1,
-      \ 'eruby': 1,
-      \ 'php' : 1,
-      \ 'html.handlebars' : 1,
-      \ 'handlebars' : 1
-      \}
-
-"
-" Gista
-"
-let g:gista#post_private=1
-let g:gista#update_on_write=1
-
-"
-" GUI
-"
-set showcmd
-set scrolloff=3
-set display+=lastline
-set sidescrolloff=5
-set guioptions-=m " no menu
-set guioptions-=T " no toolbar
-set guioptions-=r " no scrollbar
-
-autocmd FileType text setlocal textwidth=78
-autocmd FileType markdown setlocal textwidth=78
-autocmd BufRead,BufNewFile Makeppfile set filetype=make
-
-set guifont=Inconsolata\-g\ for\ Powerline:h13
-
-"
-" ruby
-"
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_rails = 1
-let g:ruby_minlines = 500
-
-" insert hashrocket =>
-imap <c-l> <space>=><space>
-
-autocmd FileType ruby set ts=2| set sw=2| set sts=2
-autocmd FileType c set tabstop=4| set softtabstop=4| set shiftwidth=4| set softtabstop=4
-
-"
-" indent lines
-"
-let g:indentLine_color_term = 239
-let g:indentLine_fileType = ['coffee']
-
-"
-" `modern` command line keys
-"
-cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
-cnoremap <C-d>  <Delete>
-cnoremap <M-b>  <S-Left>
-cnoremap <M-f>  <S-Right>
-cnoremap <M-d>  <S-right><Delete>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-right><Delete>
-cnoremap <C-g>  <C-c>
-
-"
-" colorscheme
-"
-let g:molokai_original = 1
-let g:rehash256 = 1
-colorscheme molokai
-
-"
-" Local config
-"
-if filereadable($HOME . "/.vimrc.local")
-  source ~/.vimrc.local
-endif
+nnoremap <leader>es :StripTrailingWhitespaces<CR>
