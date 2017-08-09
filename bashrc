@@ -97,15 +97,17 @@ alias gr="RBENV_VERSION=2.1.5 grid"
 alias grc="gr console"
 alias grd="gr deploy"
 alias dr="RBENV_VERSION=2.1.5 dropship"
+alias aws-sand="aws --profile sandbox --region eu-west-1"
+alias s3="aws s3"
 
 grdperf() {
-  echo "Running gr deploy ${1} staging eu-cental-1"
-  gr deploy $1 staging eu-central-1
+  echo "Running gr deploy ${1} staging perf"
+  gr deploy $1 staging perf
 }
 
 grcperf() {
-  echo "Running gr console ${1} staging eu-cental-1"
-  gr console $1 staging eu-central-1
+  echo "Running gr console ${1} staging perf"
+  gr console $1 staging perf
 }
 
 # MAC OS X
@@ -113,7 +115,7 @@ grcperf() {
 # export LC_ALL=pl_PL.UTF-8
 
 if [[ -e /usr/local/bin/brew ]]; then
-    [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
     [[ -s `brew --prefix`/etc/bash_completion.d/git-completion.bash ]] && . `brew --prefix`/etc/bash_completion.d/git-completion.bash
     [[ -s `brew --prefix`/etc/bash_completion.d/lein-completion.bash ]] && . `brew --prefix`/etc/bash_completion.d/lein-completion.bash
 fi
@@ -126,4 +128,12 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 
+export EDITOR=vim
+export VISUAL=$EDITOR
+
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+export NVM_DIR="/Users/szymzet/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
