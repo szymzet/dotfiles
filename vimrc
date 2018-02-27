@@ -1,18 +1,14 @@
 set nocompatible
 filetype off
+set regexpengine=1
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'tyru/open-browser.vim'
-Plugin 'tyru/open-browser-github.vim'
-Plugin 'lambdalisue/vim-gista'
 Plugin 'Shougo/junkfile.vim'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tomasr/molokai'
+Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
@@ -23,8 +19,8 @@ Plugin 'vim-ruby/vim-ruby', {'for' : 'ruby'}
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'w0rp/ale'
-Plugin 'janko-m/vim-test'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 call vundle#end()
 runtime macros/matchit.vim " see :help matchit-activate
 
@@ -70,7 +66,7 @@ nnoremap <leader>] :bn<CR>
 
 nnoremap <leader>D :bd!<CR>
 nnoremap <leader>d :bprevious<CR>:bdelete #<CR> " close buffer without closing window
-nnoremap <leader>Y :let @* = expand("%:p")<CR>:echo 'copied to clipboard: '.@*<CR>
+nnoremap <leader>Y :let @* = expand("%:p")<CR>:echo 'copied file path to clipboard: '.@*<CR>
 
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :qall<CR>
@@ -145,18 +141,21 @@ set nobackup
 set directory=$HOME/.vim/swapfiles/
 set undodir=$HOME/.vim/swapfiles/
 set backupdir-=.
-set number
-set relativenumber
+set nonumber
+set norelativenumber
 " copy to clipboard
 set clipboard=unnamed
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
 
-set bg=dark
-let g:molokai_original = 1
-let g:rehash256 = 1
-colorscheme molokai
+" uncomment only for molokai
+" let g:molokai_original = 1
+" let g:rehash256 = 1
+set cursorline
+set background=light
+colorscheme PaperColor
+" set guifont=Inconsolata\ for\ Powerline:h14
 
 set shell=/usr/local/bin/bash\ -i
 "
@@ -243,6 +242,7 @@ augroup myfiletypes
   autocmd!
   autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
 augroup END
+let g:ruby_path = [] " https://github.com/vim-ruby/vim-ruby/issues/294
 
 "
 " Strip trailing whitespace
