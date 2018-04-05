@@ -197,8 +197,7 @@ eval "$(rbenv init -)"
 alias gr="RBENV_VERSION=2.1.5 grid"
 alias grc="gr console"
 alias grd="gr deploy"
-alias dr="RBENV_VERSION=2.1.5 dropship"
-alias drc="/opt/base/machina/cache-agent/dr-instances"
+alias dr="goship"
 alias s3="aws s3"
 
 grdperf() {

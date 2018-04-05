@@ -8,7 +8,6 @@ Plugin 'Shougo/junkfile.vim'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
@@ -154,7 +153,6 @@ noremap Q gq
 " let g:rehash256 = 1
 set cursorline
 set background=light
-colorscheme PaperColor
 " set guifont=Inconsolata\ for\ Powerline:h14
 
 set shell=/usr/local/bin/bash\ -i
