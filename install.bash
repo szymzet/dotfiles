@@ -20,7 +20,7 @@ function info {
 function symlink_simple_dotfiles {
     local file=""
     local target=""
-    local simple_dotfiles=(bashrc gitconfig pryrc tmux.conf vimrc vimrc.bundles zshenv zshrc spacemacs)
+    local simple_dotfiles=(bashrc gitconfig pryrc tmux.conf vimrc vimrc.bundles zshenv zshrc spacemacs gitconfig gitignore_global)
 
     log "Creating symlinks for simple dotfiles"
 
@@ -39,18 +39,6 @@ function symlink_simple_dotfiles {
         fi
     done
 
-    log ""
-}
-
-function initialize_vim_vundle {
-    log "Initializing Vundle for Vim"
-
-    if [[ ! -e ~/.vim/bundle/vundle ]]; then
-        git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-        vim -u ~/.vimrc.bundles +BundleInstall +qa
-    else
-        info "Vundle for Vim already initialized"
-    fi
     log ""
 }
 
@@ -88,31 +76,8 @@ function back_up_if_exists_in_home {
     fi
 }
 
-function setup_emacs_with_prelude {
-    log "Setting up Emacs with Prelude"
-    back_up_if_exists_in_home ".emacs"
-    back_up_if_exists_in_home ".init.el"
-    back_up_if_exists_in_home ".emacs.d"
-
-    local emacs_home="${HOME}/.emacs.d"
-    info "Cloning prelude repo"
-    git clone git@github.com:bbatsov/prelude.git $emacs_home
-
-    info "Symlinking personalizations"
-
-    rm -rf "${emacs_home}/personal"
-    ln -s "${PWD}/emacs-prelude/personal" "${emacs_home}/personal"
-
-    rm -rf "${emacs_home}/prelude-modules.el"
-    ln -s "${PWD}/emacs-prelude/prelude-modules.el" $emacs_home
-
-    rm -rf "${emacs_home}/snippets"
-    ln -s "${PWD}/emacs-prelude/snippets" "${emacs_home}/snippets"
-}
-
 ################################################################################
 
 symlink_simple_dotfiles
-initialize_vim_vundle
 symlink_zshrc_to_zprofile
 symlink_bashrc_to_profile
