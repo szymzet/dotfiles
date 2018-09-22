@@ -1,10 +1,10 @@
 [user]
-  name = szymzet
-  email = sz.zabkiewicz@gmail.com
+	name = szymzet
+	email = sz.zabkiewicz@gmail.com
 [core]
   editor = vim
   pager=less -x4
-;  excludesfile = /opt/boxen/config/git/gitignore
+	excludesfile = /Users/szymzet/.gitignore_global
 [color]
   branch = auto
   diff = auto
@@ -23,10 +23,6 @@
   changed = green
   untracked = cyan
 
-; LINUX
-; [mergetool "mymeld"]
-;   cmd = meld --diff $BASE $LOCAL --diff $BASE $REMOTE --diff $LOCAL $MERGED $REMOTE
-
 [alias]
   d = difftool
   st = status -s
@@ -38,25 +34,13 @@
   ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
   root = rev-parse --show-toplevel
-  pure = pull --rebase
   aa = add --all
   hard = reset --hard
   amend = commit --amend
   df = diff
   dft = difftool
   rb = rebase
-
-; BOXEN
-; [credential]
-;   helper = /opt/boxen/bin/boxen-git-credential
-
-[mergetool]
-  prompt = false
-  keepTemporaries = false
-[difftool]
-  prompt = false
-[diff]
-  tool = p4merge
-[merge]
-  tool = p4merge
-
+  pr = pull --rebase
+  po = push origin
+  mg = merge
+  rs = reset
