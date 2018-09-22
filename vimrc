@@ -2,25 +2,34 @@ set nocompatible
 filetype off
 set regexpengine=1
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'Shougo/junkfile.vim'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-ruby/vim-ruby', {'for' : 'ruby'}
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-call vundle#end()
+"
+" Plugins (https://github.com/junegunn/vim-plug)
+"
+call plug#begin('~/.vim/plugged')
+Plug 'Shougo/junkfile.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-rhubarb'
+Plug 'vim-ruby/vim-ruby', {'for' : 'ruby'}
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'w0rp/ale'
+Plug 'raimondi/delimitmate'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/gv.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+call plug#end()
 runtime macros/matchit.vim " see :help matchit-activate
 
 let mapleader = "\<space>"
@@ -97,8 +106,12 @@ nnoremap <silent> <c-left> :vertical resize -5<CR>
 "
 filetype plugin indent on
 syntax on
+colors gruvbox
+set termguicolors
 set encoding=utf8
 set autoindent
+set breakindent
+set showbreak=\\\\\
 set autoread " reload file if changed outside
 set backspace=indent,eol,start
 set cmdheight=2
@@ -111,13 +124,14 @@ set history=200
 set hidden " buffers with changes can be window-less
 set incsearch
 set hlsearch
-set ignorecase
-set smartcase
+set synmaxcol=200
+set ignorecase smartcase
 set laststatus=2
 set lazyredraw
 set matchpairs+=<:> " Match, to be used with %
 set nojoinspaces " Prevents inserting two spaces after punctuation on a join (J)
 set scrolloff=1
+set guioptions='g'
 set shiftwidth=2
 set softtabstop=2 " Let backspace delete indent
 set splitbelow " Puts new split windows to the bottom of the current
@@ -139,6 +153,7 @@ set nowritebackup
 set nobackup
 set directory=$HOME/.vim/swapfiles/
 set undodir=$HOME/.vim/swapfiles/
+set dictionary+=/usr/share/dict/words
 set backupdir-=.
 set nonumber
 set norelativenumber
@@ -152,10 +167,10 @@ noremap Q gq
 " let g:molokai_original = 1
 " let g:rehash256 = 1
 set cursorline
-set background=light
-" set guifont=Inconsolata\ for\ Powerline:h14
+set background=dark
+set guifont=Inconsolata\ for\ Powerline:h14
 
-set shell=/usr/local/bin/bash\ -i
+set shell=/usr/local/bin/fish\ -i
 "
 " emacs style key bindings on command line
 "
@@ -191,7 +206,8 @@ let g:fzf_history_dir = '~/.fzf-history'
 nnoremap <leader>f :FZFFiles .<CR>
 nnoremap <leader>b :FZFBuffers<CR>
 nnoremap <leader>s :FZFBLines<CR>
-nnoremap <leader>C :FZFCommands<CR>
+nnoremap <leader>; :FZFCommands<CR>
+nnoremap <leader>: :FZFCommands<CR>
 nnoremap <leader>/ :FZFAg 
 nnoremap <leader>* :FZFAg <C-R><C-W><CR>
 
@@ -219,22 +235,15 @@ nmap <leader>l <Plug>(easymotion-overwin-line)
 nmap <leader>j <Plug>(easymotion-overwin-f)
 
 "
-" Github
+" ALE
 "
-let g:openbrowser_github_always_use_commit_hash=0
-let g:openbrowser_github_url_exists_check='no'
-nnoremap <leader>gh :OpenGithubFile<CR>
-
-
-"
-" Gista
-"
-let g:gista#command#post#default_public=0
-let g:gista#command#post#allow_empty_description=1
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next)
 
 "
 " Ruby settings
 "
+
 augroup myfiletypes
   " Clear old autocmds in group
   autocmd!
