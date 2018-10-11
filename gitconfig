@@ -4,7 +4,7 @@
 [core]
   editor = vim
   pager=less -x4
-	excludesfile = /Users/szymzet/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [color]
   branch = auto
   diff = auto
@@ -44,3 +44,8 @@
   po = push origin
   mg = merge
   rs = reset
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

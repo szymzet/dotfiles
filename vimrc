@@ -168,9 +168,9 @@ noremap Q gq
 " let g:rehash256 = 1
 set cursorline
 set background=dark
-set guifont=Inconsolata\ for\ Powerline:h14
+set guifont=Inconsolata-g\ for\ Powerline:h12
 
-set shell=/usr/local/bin/fish\ -i
+set shell=/usr/local/bin/bash\ -i
 "
 " emacs style key bindings on command line
 "

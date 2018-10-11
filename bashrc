@@ -91,22 +91,6 @@ bind '"\e[D": backward-char'
 
 ## BETTER DIRECTORY NAVIGATION ##
 
-# Prepend cd to directory names automatically
-shopt -s autocd 2> /dev/null
-# Correct spelling errors during tab-completion
-shopt -s dirspell 2> /dev/null
-# Correct spelling errors in arguments supplied to cd
-shopt -s cdspell 2> /dev/null
-
-# This defines where cd looks for targets
-# Add the directories you want to have fast access to, separated by colon
-# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-CDPATH=".:/opt/base"
-
-# This allows you to bookmark your favorite places across the file system
-# Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
-shopt -s cdable_vars
-export repos="/opt/base/"
 
 #
 # END OF config taken from mrzool/bash-sensible github repo
@@ -125,12 +109,28 @@ HISTFILESIZE=10000
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# MAC OS X
-# source /opt/boxen/homebrew/etc/bash_completion.d/git-completion.bash
 # alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 
+
+# Prepend cd to directory names automatically
+shopt -s autocd 2> /dev/null
+# Correct spelling errors during tab-completion
+shopt -s dirspell 2> /dev/null
+# Correct spelling errors in arguments supplied to cd
+shopt -s cdspell 2> /dev/null
+
+if [[ -e /usr/local/bin/brew ]]; then
+  for f in /usr/local/etc/bash_completion.d/*; do
+    source $f
+  done
+
+  __git_complete g __git_main
+fi
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
 # set the prompt
-# PS1='\[\033[01;31m\]\u:\w\[\033[01;34m\] $(__git_ps1)\[\033[00m\]\n$ '
+PS1='\[\033[01;31m\]\u:\w\[\033[01;34m\] $(__git_ps1)\[\033[00m\]\n$ '
 
 # enable color support of ls and also add handy aliases
 alias grep='grep --color=auto'
@@ -170,14 +170,6 @@ glso() { # ls origin
     gls origin/${branch}..${branch}
 }
 
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
 if [ -f /usr/share/autojump/autojump.bash ]; then
     . /usr/share/autojump/autojump.bash
 fi
@@ -193,28 +185,11 @@ mkcd() {
 
 eval "$(rbenv init -)"
 
-# work stuff
-alias gr="RBENV_VERSION=2.1.5 grid"
+alias gr="RBENV_VERSION=2.3.7 grid"
 alias grc="gr console"
 alias grd="gr deploy"
 alias dr="goship"
 alias s3="aws s3"
-
-grdperf() {
-  echo "Running gr deploy ${1} staging perf"
-  gr deploy $1 staging perf
-}
-
-grcperf() {
-  echo "Running gr console ${1} staging perf"
-  gr console $1 staging perf
-}
-
-if [[ -e /usr/local/bin/brew ]]; then
-    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-    [[ -s `brew --prefix`/etc/bash_completion.d/git-completion.bash ]] && . `brew --prefix`/etc/bash_completion.d/git-completion.bash
-    [[ -s `brew --prefix`/etc/bash_completion.d/lein-completion.bash ]] && . `brew --prefix`/etc/bash_completion.d/lein-completion.bash
-fi
 
 # enable colors for OS X
 export CLICOLOR=1
