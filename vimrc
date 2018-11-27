@@ -42,9 +42,10 @@ inoremap jk <esc>
 inoremap kj <esc>
 inoremap fd <esc>
 
-nnoremap <leader>yy "+yy
-noremap <leader>y "+y " clipboard copy&paste
-noremap <leader>p "+p
+noremap <leader>yy :.w !pbcopy<CR><CR>
+noremap <leader>y :.w !pbcopy<CR><CR>
+vmap <leader>y :.w !pbcopy<CR><CR>
+noremap <leader>p :r !pbpaste<CR>
 
 " quick nohighlight
 nnoremap <leader>c :nohlsearch<CR>:match<CR>:echo 'cleared search highlight'<CR> " c == clear
