@@ -5,6 +5,7 @@
   editor = vim
   pager=less -x4
 	excludesfile = ~/.gitignore_global
+	autocrlf = input
 [color]
   branch = auto
   diff = auto

@@ -171,7 +171,7 @@ set cursorline
 set background=dark
 set guifont=Inconsolata-g\ for\ Powerline:h12
 
-set shell=/usr/local/bin/bash\ -i
+set shell=/usr/local/bin/zsh\ -i
 "
 " emacs style key bindings on command line
 "

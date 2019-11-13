@@ -71,6 +71,8 @@ plugins=(
   bundler
   zsh-autosuggestions
   history-substring-search
+  aws
+  ripgrep
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -104,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias gr="RBENV_VERSION=2.3.7 grid"
+alias gr="RBENV_VERSION=2.3.8 grid"
 alias grc="gr console"
 alias grd="gr deploy"
 alias dr="goship"
@@ -118,3 +120,8 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
+
+
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+export LDFLAGS="-L/usr/local/opt/libiconv/lib"
+export CPPFLAGS="-I/usr/local/opt/libiconv/include"
