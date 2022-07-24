@@ -19,7 +19,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'vim-ruby/vim-ruby', {'for' : 'ruby'}
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'

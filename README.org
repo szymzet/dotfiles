@@ -1,7 +1,0 @@
-# Installation
-
-Change current directory to this repo's root and run.
-
-#+BEGIN_SRC bash
-bash ./install.bash
-#+END_SRC

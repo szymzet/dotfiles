@@ -1,0 +1,11 @@
+plugins=(
+  git
+  autojump
+  docker
+  rbenv
+  bundler
+  history-substring-search
+  aws
+  ripgrep
+  fzf
+)

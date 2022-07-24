@@ -1,11 +1,11 @@
 [user]
-	name = szymzet
-	email = sz.zabkiewicz@gmail.com
+  name = szymzet
+  email = sz.zabkiewicz@gmail.com
 [core]
-  editor = vim
+  editor = code
   pager=less -x4
-	excludesfile = ~/.gitignore_global
-	autocrlf = input
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
 [color]
   branch = auto
   diff = auto
@@ -25,7 +25,6 @@
   untracked = cyan
 
 [alias]
-  d = difftool
   st = status -s
   cl = clone
   ci = commit
@@ -36,17 +35,9 @@
   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
   root = rev-parse --show-toplevel
   aa = add --all
-  hard = reset --hard
-  amend = commit --amend
   df = diff
-  dft = difftool
   rb = rebase
   pr = pull --rebase
   po = push origin
   mg = merge
   rs = reset
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
